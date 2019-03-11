@@ -1,6 +1,6 @@
 //Задание массива
 const ARRACTION = ["+", "-", "/", "*"];
-const ARRMODALWINDOWS = ["Введите первый операнд",
+const ARRWINDOWS = ["Введите первый операнд",
     "Введите знак действия ( + - / * )",
     "Введите второй операнд"];
 
@@ -37,19 +37,20 @@ function result(oneOperand, actionFunc, twoOperand) {
 }
 
 //Переменные для цикла
-let operandOne;
-let action;
-let operandTwo;
-//Вывод модальных окон при помощи цикла и массива строковых значений
-for (let j = 0; j < ARRMODALWINDOWS.length; j++) {
-    let value = prompt(ARRMODALWINDOWS[j], '');
 
-    switch (j) {
-        case 0: operandOne = checkOperand(value); break;
-        case 1: action = checkAction(value); break;
-        case 2: operandTwo = checkOperand(value); break;
-    }
+let operandAction = [];
+let j = 0;
+
+while (j < ARRWINDOWS.length) {
+    let value = prompt(ARRWINDOWS[j], '');
+
+    if (j == 0 || j == 2) {
+        operandAction[j] = checkOperand(value);
+    } else 
+    operandAction[j] = checkAction(value);
+
+    j++;
 }
 
 //Вывод результата
-alert('Результат = ' + result(operandOne, action, operandTwo));
+alert('Результат = ' + result(operandAction[0], operandAction[1], operandAction[2]));
