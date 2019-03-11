@@ -2,17 +2,18 @@
 const ARRACTION = ["+", "-", "/", "*"];
 
 //Проверка операнда
-function checkOperand(numberCalc) {
+function checkOperand(numb, numberCalc) {
+
     if (!Number(numberCalc)) {
-        numberCalc = prompt('Введите числовой операнд!', '');
-        return checkOperand(numberCalc);
+        numberCalc = prompt('Введите ' + numb +' числовой операнд!', '');
+        return checkOperand(numb, numberCalc);
     } else
         return +numberCalc;
 }
 
 //Проверка знака
 function checkAction(action) {
-    
+
     for (let i = 0; i < ARRACTION.length; i++) {
         if (action == ARRACTION[i]) {
             return ARRACTION[i];
@@ -34,10 +35,9 @@ function result(oneOperand, actionFunc, twoOperand) {
 }
 
 //Главный код
-let value = 0;
-let operandOne = checkOperand(value);
-let action = checkAction(value);
-let operandTwo = checkOperand(value);
+let operandOne = checkOperand('первый');
+let action = checkAction();
+let operandTwo = checkOperand('второй');
 
 //Вывод результата
 alert('Результат = ' + result(operandOne, action, operandTwo));
