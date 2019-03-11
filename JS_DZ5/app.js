@@ -1,51 +1,55 @@
 //Задание массива
 const ARRACTION = ["+", "-", "/", "*"];
+const ARRMODALWINDOWS = ["Введите первый операнд",
+    "Введите знак действия ( + - / * )",
+    "Введите второй операнд"];
 
 //Проверка операнда
-function checkOperand(number) {
-    if (isNaN(+number) || number === '') {
-        number = prompt ('Введите числовой операнд!', '');
-        return checkOperand(number);
-    } else { console.log(number); return +number; }
+function checkOperand(numberCalc) {
+    if (!Number(numberCalc)) {
+        numberCalc = prompt('Введите числовой операнд!', '');
+        return checkOperand(numberCalc);
+    } else
+        return +numberCalc;
 }
 
 //Проверка знака
 function checkAction(action) {
+    
+    for (let i = 0; i < ARRACTION.length; i++) {
+        if (action == ARRACTION[i]) {
+            return ARRACTION[i];
+        }
+    }
 
-    for (let i=0; i<ARRACTION.length; i++) {
-
-    if (action == ARRACTION[i]) {
-        return i;
-    } 
-
-}
-
-    action = prompt ('Введите правильный знак действия: или +, или - , или /, или *', '');
+    action = prompt('Введите правильный знак действия: или +, или - , или /, или *', '');
     return checkAction(action);
 }
 
 //Вычисления
-function result (oneValue, twoValue, threeValue) {
-    switch (twoValue) {
-        case 0: return oneValue + threeValue;
-        case 1: return oneValue - threeValue;
-        case 2: return oneValue / threeValue;
-        case 3: return oneValue * threeValue;
+function result(oneOperand, actionFunc, twoOperand) {
+    switch (actionFunc) {
+        case '+': return oneOperand + twoOperand;
+        case '-': return oneOperand - twoOperand;
+        case '/': return oneOperand / twoOperand;
+        case '*': return oneOperand * twoOperand;
     }
 }
 
-//Модальные окна
-let value = prompt ('Введите первый операнд', '');
-let valueOne = checkOperand(value);
-console.log(valueOne);
+//Переменные для цикла
+let operandOne;
+let action;
+let operandTwo;
+//Вывод модальных окон при помощи цикла и массива строковых значений
+for (let j = 0; j < ARRMODALWINDOWS.length; j++) {
+    let value = prompt(ARRMODALWINDOWS[j], '');
 
-value = prompt ('Введите знак действия ( + - / * )', '');
-let valueTwo = checkAction(value);
-console.log(valueTwo);
-
-value = prompt ('Введите второй операнд', '');
-let valueThree = checkOperand(value);
-console.log(valueThree);
+    switch (j) {
+        case 0: operandOne = checkOperand(value); break;
+        case 1: action = checkAction(value); break;
+        case 2: operandTwo = checkOperand(value); break;
+    }
+}
 
 //Вывод результата
-alert ('Результат = ' + result(valueOne, valueTwo, valueThree));
+alert('Результат = ' + result(operandOne, action, operandTwo));
