@@ -37,20 +37,11 @@ function result(oneOperand, actionFunc, twoOperand) {
 }
 
 //Переменные для цикла
+let value = 0;
 
-let operandAction = [];
-let j = 0;
-
-while (j < ARRWINDOWS.length) {
-    let value = prompt(ARRWINDOWS[j], '');
-
-    if (j == 0 || j == 2) {
-        operandAction[j] = checkOperand(value);
-    } else 
-    operandAction[j] = checkAction(value);
-
-    j++;
-}
+let operandOne = checkOperand(value);
+let action = checkAction(value);
+let operandTwo = checkOperand(value);
 
 //Вывод результата
-alert('Результат = ' + result(operandAction[0], operandAction[1], operandAction[2]));
+alert('Результат = ' + result(operandOne, action, operandTwo));
