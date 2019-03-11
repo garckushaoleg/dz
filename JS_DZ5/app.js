@@ -1,8 +1,5 @@
 //Задание массива
 const ARRACTION = ["+", "-", "/", "*"];
-const ARRWINDOWS = ["Введите первый операнд",
-    "Введите знак действия ( + - / * )",
-    "Введите второй операнд"];
 
 //Проверка операнда
 function checkOperand(numberCalc) {
@@ -36,9 +33,8 @@ function result(oneOperand, actionFunc, twoOperand) {
     }
 }
 
-//Переменные для цикла
+//Главный код
 let value = 0;
-
 let operandOne = checkOperand(value);
 let action = checkAction(value);
 let operandTwo = checkOperand(value);
