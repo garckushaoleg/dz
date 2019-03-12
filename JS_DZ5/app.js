@@ -2,26 +2,27 @@
 const ARRACTION = ["+", "-", "/", "*"];
 
 //Проверка операнда
-function checkOperand(numb, numberCalc) {
+function testOperand(numb) {
+    let numberCalc = prompt('Введите ' + numb + ' числовой операнд!', '');
 
-    if (!Number(numberCalc)) {
-        numberCalc = prompt('Введите ' + numb +' числовой операнд!', '');
-        return checkOperand(numb, numberCalc);
+    if (!Number(numberCalc) && numberCalc != '0') {
+        return testOperand(numb);
     } else
         return +numberCalc;
 }
 
 //Проверка знака
-function checkAction(action) {
+function testAction() {
+    let actionValue = prompt('Введите правильный знак действия: или +, или - , или /, или *', '');
 
     for (let i = 0; i < ARRACTION.length; i++) {
-        if (action == ARRACTION[i]) {
+        if (actionValue == ARRACTION[i]) {
             return ARRACTION[i];
         }
     }
 
-    action = prompt('Введите правильный знак действия: или +, или - , или /, или *', '');
-    return checkAction(action);
+    
+    return testAction();
 }
 
 //Вычисления
@@ -35,9 +36,9 @@ function result(oneOperand, actionFunc, twoOperand) {
 }
 
 //Главный код
-let operandOne = checkOperand('первый');
-let action = checkAction();
-let operandTwo = checkOperand('второй');
+let operandOne = testOperand('первый');
+let action = testAction();
+let operandTwo = testOperand('второй');
 
 //Вывод результата
 alert('Результат = ' + result(operandOne, action, operandTwo));
