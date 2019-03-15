@@ -10,33 +10,37 @@ function validate(numberTest) {
 /*Функция вывода количества чётных чисел в числе. Передаём в функцию строку, делаем из неё массив
 и при помощи цикла находим нулевой остаток от деления для каждого элемента массива.*/
 function getEvenNumbers(numbers) {
-    let massive = numbers.split('');
-    let resultYes = 0;
-    for (let i = 0; i < massive.length; i++) {
-        if (+massive[i] % 2 == 0) {
-            resultYes += 1;
+    let numeralAll = numbers.split('');
+    let result = 0;
+    for (let i = 0; i < numeralAll.length; i++) {
+        if (!(+numeralAll[i] % 2)) {
+            result ++;
         }
     }
 
-    return (resultYes) ? resultYes : 0;
+    return result;
+}
+
+function calculateRandomNumber(NumberOne, NumberTwo) {
+    let calculateResult = Math.random() * (NumberTwo - NumberOne) + NumberOne;
+    return calculateResult;
 }
 
 //Функция нахождения большего из двух рандомных чисел
 function getRandomNumber(minNumber, maxNumber) {
-    let numberOne = Math.random() * (maxNumber - minNumber) + minNumber;
-    console.log(numberOne);
-    let numberTwo = Math.random() * (maxNumber - minNumber) + minNumber;
-    console.log(numberTwo);
-
-    return (numberOne > numberTwo) ? numberOne : numberTwo;
+    let numberRandomOne = calculateRandomNumber(minNumber, maxNumber);
+    let numberRandomTwo = calculateRandomNumber(minNumber, maxNumber);
+    return (numberRandomOne > numberRandomTwo) ? numberRandomOne : numberRandomTwo;
 }
 
 
 //Количество чётных чисел
 let number = prompt('Введите число', '');
 let correctResult = validate(number);
-alert(getEvenNumbers(correctResult));
+EvenNumbers = getEvenNumbers(correctResult);
+alert(EvenNumbers);
 
 //Большее из рандомных чисел
-let RandomNumber = getRandomNumber(1000, 2000);
-alert(Math.trunc(RandomNumber));
+let randomNumber = getRandomNumber(1000, 2000);
+randomNumber = Math.trunc(randomNumber);
+alert(randomNumber);
