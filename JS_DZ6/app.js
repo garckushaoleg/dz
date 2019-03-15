@@ -1,7 +1,13 @@
+//Вывод модального окна
+function modalWindow(value) {
+    if (!value) return prompt('Введите число', '');
+    else return prompt('Введите число ещё раз', '');
+}
+
 //Валидация
 function validate(numberTest) {
     if (!Number(numberTest) && numberTest !== '0') {
-        numberTest = prompt('Введите число ещё раз');
+        numberTest = modalWindow(1);
         return validate(numberTest);
     } else return numberTest;
 }
@@ -21,26 +27,26 @@ function getEvenNumbers(numbers) {
     return result;
 }
 
-function calculateRandomNumber(NumberOne, NumberTwo) {
+function calculateNumber(NumberOne, NumberTwo) {
     let calculateResult = Math.random() * (NumberTwo - NumberOne) + NumberOne;
     return calculateResult;
 }
 
 //Функция нахождения большего из двух рандомных чисел
-function getRandomNumber(minNumber, maxNumber) {
-    let numberRandomOne = calculateRandomNumber(minNumber, maxNumber);
-    let numberRandomTwo = calculateRandomNumber(minNumber, maxNumber);
+function getLagerNumber(minNumber, maxNumber) {
+    let numberRandomOne = calculateNumber(minNumber, maxNumber);
+    let numberRandomTwo = calculateNumber(minNumber, maxNumber);
     return (numberRandomOne > numberRandomTwo) ? numberRandomOne : numberRandomTwo;
 }
 
 
 //Количество чётных чисел
-let number = prompt('Введите число', '');
+let number = modalWindow(0);
 let correctResult = validate(number);
-EvenNumbers = getEvenNumbers(correctResult);
-alert(EvenNumbers);
+let evenNumbers = getEvenNumbers(correctResult);
+alert(evenNumbers);
 
 //Большее из рандомных чисел
-let randomNumber = getRandomNumber(1000, 2000);
+let randomNumber = getLagerNumber(1000, 2000);
 randomNumber = Math.trunc(randomNumber);
 alert(randomNumber);
