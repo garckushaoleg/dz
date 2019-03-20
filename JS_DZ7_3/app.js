@@ -21,25 +21,12 @@ function copy(objForCopy) {
             // Если объект, то вызываю ещё раз функцию и передаю свойству результат-объект
             objCopy[key] = copy(objForCopy[key]);
         }
-        //Если проверка на массив true, то копируем массив
-        else if (Array.isArray(objForCopy)) {
-            objCopy[key] = objForCopy[key];
-        }
         //Копируем первый уровень
         else objCopy[key] = objForCopy[key];
 
     }
-    console.log(objCopy);
     return objCopy;
 }
-
-// let key = 'arr';
-// console.log(obj[key].length);
-// for(let i=0; i<obj[key].length; i++) {
-//     console.log(obj[key][i]);
-//     console.log(obj[key[i]]);
-// }
-
 
 const objTwo = copy(obj);
 
