@@ -14,16 +14,12 @@ function copy(objForCopy) {
 
     for (let key in objForCopy) {
         //Если массив, то запускаем глубокое копирование
-        if (Array.isArray(objForCopy[key])) {
-            objCopy[key] = copy(objForCopy[key]);
-        } 
-        else if (typeof (objForCopy[key]) == "object" && objForCopy[key] !== null) {
+        if (typeof (objForCopy[key]) == "object" && objForCopy[key] !== null) {
             // Если объект, то вызываю ещё раз функцию и передаю свойству результат-объект
             objCopy[key] = copy(objForCopy[key]);
         }
         //Копируем первый уровень
         else objCopy[key] = objForCopy[key];
-
     }
     return objCopy;
 }
