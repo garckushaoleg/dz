@@ -6,9 +6,12 @@ const obj = { name: 'Alex',
               adress: { country: 'UA', city: 'Dnipro' } };
 
 
+
 function copy(objForCopy) {
     let objCopy = {};
-    let arrCopy = [];
+    // Если на рекурсии возвращается массив то из объекта, в который копируют, делаю массив.
+    if (Array.isArray(objForCopy)) objCopy = [];
+
     for (let key in objForCopy) {
         //Если массив, то запускаем глубокое копирование
         if (Array.isArray(objForCopy[key])) {
@@ -19,15 +22,24 @@ function copy(objForCopy) {
             objCopy[key] = copy(objForCopy[key]);
         }
         //Если проверка на массив true, то копируем массив
-        else if (Array.isArray(objForCopy)) arrCopy[key] = objForCopy[key];
+        else if (Array.isArray(objForCopy)) {
+            objCopy[key] = objForCopy[key];
+        }
+        //Копируем первый уровень
         else objCopy[key] = objForCopy[key];
 
     }
-    //Если проверка на массив true, то возвращаем массив
-    if (Array.isArray(objForCopy)) return arrCopy;
-    
+    console.log(objCopy);
     return objCopy;
 }
+
+// let key = 'arr';
+// console.log(obj[key].length);
+// for(let i=0; i<obj[key].length; i++) {
+//     console.log(obj[key][i]);
+//     console.log(obj[key[i]]);
+// }
+
 
 const objTwo = copy(obj);
 
