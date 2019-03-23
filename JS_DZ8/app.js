@@ -1,36 +1,40 @@
-//Возвращает имя юзера
-function getUserName() {
-    let userAnswer = prompt('Введите Ваше имя пожалуйста', ''); 
+//Проверка имени юзера
+function getUserName(userAnswer) {
     if (userAnswer === null || userAnswer.trim() === '' || !isNaN(Number(userAnswer))) {
-        return getUserName();
+        return false;
     } else {
-        return userAnswer;
+        return true;
     }
 }
 
 
-//Возвращает число
-function getNumber() {
-    let answerUser = prompt('Введите число от 0 до 100', ''); 
+//Валидация числа
+function getNumber(answerUser) {
     if (!isNaN(Number(answerUser)) && answerUser >= 0 && answerUser <= 100 
         && answerUser !== null && answerUser.trim() !== '') {
-        return answerUser;
+        return true;
     } else {
-        return getNumber();
+        return false;
     }
 }
 
+let answer;
+
+do {
+    answer = prompt('Введите Ваше имя пожалуйста', '');
+} while (!getUserName(answer));
 //Добавление в тег h1 приветствия с именем юзера
 let h1 = document.body.getElementsByTagName('h1') [0];
-h1.innerText = 'Привет ' + getUserName() + '!';
+h1.innerText = 'Привет ' + answer + '!';
 
+do {
+    answer = prompt('Введите число от 0 до 100', ''); 
+} while (!getNumber(answer));
 // Создание и добавление тега ul
 let ul = document.createElement('ul');
 document.body.appendChild(ul);
-//Ввод и проверка числа
-let answerTrue = getNumber();
 //Теги li с числами из массива
-for(let i = 0; i <= answerTrue; i++) {
+for(let i = 0; i <= answer; i++) {
     ul.innerHTML = ul.innerHTML + '<li>' + i + '</li>';
 }
 
