@@ -1,0 +1,17 @@
+p {
+    display: inline-block;
+    margin-top: 20px;
+    margin-left: 20px;
+    padding: 20px 30px;
+    background-color: aqua;
+    color: black;
+    border: 2px solid blue;
+    font-size: 32px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+p:active {
+    border: 5px solid blue;
+    padding: 15px 25px;
+}
