@@ -1,0 +1,11 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+li {
+    background-color: yellow;
+    padding: 15px;
+    font-size: 24px;
+}
