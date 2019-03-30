@@ -1,24 +1,28 @@
 function addLi() {
     let li = document.createElement('li');
+    li.setAttribute('elementLi', '');
     ol.appendChild(li);
-    li.textContent = textList.value;
-
-    li.addEventListener('click', addBg);
+    li.textContent = inputData.value;
     
-    resetLi();
+    resetInput();
 }
 
-function resetLi() {
-    textList.value = '';
+function resetInput() {
+    inputData.value = '';
 }
 
-function addBg(event) {
-    event.target.style.backgroundColor = 'green';
+function toggleBg(event) {
+    if (event.target.hasAttribute('elementLi')) {
+        if (event.target.style.backgroundColor == 'green') 
+        event.target.style.backgroundColor = 'yellow'
+        else event.target.style.backgroundColor = 'green'
+    }
 }
 
 
-let textList = document.getElementById('textList');
-const submitList = document.getElementById('submitList');
+let inputData = document.getElementById('inputData');
+const submitData = document.getElementById('submitData');
 let ol = document.getElementsByTagName('ol')[0];
 
-submitList.addEventListener('click', addLi);
+submitData.addEventListener('click', addLi);
+ol.addEventListener('click', toggleBg);

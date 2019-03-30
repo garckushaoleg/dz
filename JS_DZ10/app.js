@@ -8,24 +8,27 @@ function addContact(contact) {
 
     contactTr.innerHTML = contactTemplate.replace('{{name}}', contact.name || '-')
                                          .replace('{{phone}}', contact.phone || '-')
-                                         .replace('{{age}}', contact.age || '-')
-                                         .replace('{{delete}}', contact.buttonDelete);
+                                         .replace('{{age}}', contact.age || '-');
 
     contactList.appendChild(contactTr);
     
 }
 
-//Обработчик (удаление строки)
+//Обработчик на удаление строки
 function onDeleteLine(event) {
-    if (event.target.hasAttribute('delete-button')) event.target.parentElement.parentElement.remove();
+    deleteLine(event.target);
+}
+
+//Функция удаления строки
+function deleteLine(elementDelete) {
+    if (elementDelete.hasAttribute('delete-button')) elementDelete.parentElement.parentElement.remove();
 }
 
 function submitContact() {
     const contact = {
         name: contactNameInput.value,
         phone: contactPhoneInput.value,
-        age: contactAgeInput.value,
-        buttonDelete: '<button delete-button>Delete</button>'
+        age: contactAgeInput.value
     }
     addContact(contact);
     resetContactForm();
