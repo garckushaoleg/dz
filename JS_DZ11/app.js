@@ -1,24 +1,28 @@
 function calculator(operandOne) {
 
         return {
-            add: function getResultAdd(operandTwo) {
+            add: function getResultAddition(operandTwo) {
                 return operandOne + operandTwo
             },
 
-            sub: function getResultSub(operandTwo) {
+            sub: function getResultSubtraction(operandTwo) {
                 return operandOne - operandTwo
             },
 
-            divide: function getResultDivide(operandTwo) {
-                return operandOne * operandTwo
-            },
-
-            multiplay: function getResultMultiplay(operandTwo) {
+            divide: function getResultDivision(operandTwo) {
                 return operandOne/operandTwo
             },
 
-            set: function getResultSet(value) {
+            mult: function getMultiplicationResult(operandTwo) {
+                return operandOne*operandTwo
+            },
+
+            set: function getChangedBaseValue(value) {
                 return operandOne = value
+            },
+
+            get: function getBaseValue() {
+                return operandOne;
             } 
     }
 
@@ -26,16 +30,20 @@ function calculator(operandOne) {
 
 let calc = calculator(10);
 
-let result = calc.add(5);
+let result = calc.add(45);
 console.log(result);
-result = calc.divide(2);
+result = calc.divide(5);
 console.log(result);
-result = calc.sub(20);
+result = calc.sub(45);
 console.log(result);
-result = calc.multiplay(2);
+result = calc.mult(5);
 console.log(result);
 
-result = calc.set(200);
+result = calc.set(100);
 console.log(result);
 result = calc.add(5);
+console.log(result);
+result = calc.get();
+console.log(result);
+result = calc.mult(5);
 console.log(result);
