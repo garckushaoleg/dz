@@ -12,13 +12,12 @@ var users = [{
     age: 18
   }];
 
+
 function getField(key) {
-  let i = 0;
     
-  return function () {
-     let arrElement= users[i];
-     i++;
-     return arrElement[key];
+  return function (item) {
+
+    return item[key]
   }
 }
 
