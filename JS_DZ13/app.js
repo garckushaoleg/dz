@@ -1,22 +1,26 @@
 function Hamburger(dishName, stuffing) {
     this.dishName = dishName;
     this.stuffing = stuffing;
-    this.caloriesAddHamburger = 0;
-    this.priceHamburgerAdd = 0;
+
+    this.additive = [];
 }
 
 Hamburger.prototype.addTopping = function (additive) {
-    this.additive = additive;
+    this.additive.push(additive);
 }
 
 Hamburger.prototype.calculateCalories = function () {
-    this.caloriesAddHamburger += this.additive.calories;
-    return this.caloriesAddHamburger + this.dishName.calories + this.stuffing.calories
+
+    return this.dishName.calories + this.stuffing.calories + 
+    this.additive.reduce( (sum, item) => sum + item.calories, 0)
+
 }
 
 Hamburger.prototype.calculatePrice = function () {
-    this.priceHamburgerAdd += this.additive.price;
-    return this.priceHamburgerAdd + this.dishName.price + this.stuffing.price
+
+    return this.dishName.price + this.stuffing.price + 
+    this.additive.reduce( (sum, item) => sum + item.price, 0)
+    
 }
 
 Hamburger.SIZE_SMALL = {
@@ -66,4 +70,5 @@ console.log('Price:' + hamburger.calculatePrice());
 hamburger.addTopping(Hamburger.ADDITIVE_SEASONING);
 // А сколько теперь стоит?
 console.log('Price with sauce:' + hamburger.calculatePrice());
+
 console.log(hamburger);
