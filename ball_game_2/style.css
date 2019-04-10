@@ -1,0 +1,13 @@
+.container {
+    position: relative;
+    border: 1px solid black; 
+    background: rgba(0, 0, 0, 0.1);
+}
+
+p {
+    position: absolute;
+    width: 9px;
+    height: 9px;
+    background-color: blue;
+    border: 1px solid blueviolet;
+}
