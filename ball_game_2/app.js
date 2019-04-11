@@ -6,7 +6,7 @@ function BallGame(el, height, width){
     this.horizontalDistance = 0;// Расстояние пройденное по горизонтали
     this.verticalDistance = 0;// Расстояние пройденное по вертикали
 
-    this.value = true;// Использую для определения нажатого и повторно нажатого пробела
+    this.spaceSwitch = true;// Использую для определения нажатого и повторно нажатого пробела
     this.stepDirection = 'right';// Использую для задания направления движения
     this.move = 10;// Величина шага
 
@@ -34,9 +34,9 @@ function transformElement() {
 
 //Создание мяча
 function createBall() {
-    let p = document.createElement('p');
-    this.p = p;
-    this.el.appendChild(p);
+    let ball = document.createElement('p');
+    this.ball = ball;
+    this.el.appendChild(ball);
 }
 
 //Движение мяча
@@ -57,16 +57,16 @@ function moveBall() {
     if ((this.verticalDistance < 0) && (this.stepDirection = 'up')) 
         this.verticalDistance = this.height - this.move;
         
-    this.p.style.left = this.horizontalDistance + 'px';
-    this.p.style.top = this.verticalDistance + 'px';
+    this.ball.style.left = this.horizontalDistance + 'px';
+    this.ball.style.top = this.verticalDistance + 'px';
     setTimeout(moveBall.bind(this), 1000);
 }
 
 //Событие
 function onDriveBall(event) {
 
-    if ((event.keyCode == 32) && this.value) { this.move = 0; this.value = false }
-    else { this.move = 10; this.value = true }
+    if ((event.keyCode == 32) && this.spaceSwitch) { this.move = 0; this.spaceSwitch = false }
+    else { this.move = 10; this.spaceSwitch = true }
 
     switch (event.keyCode) {
         case 39: this.stepDirection = 'right'; break
