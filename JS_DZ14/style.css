@@ -1,0 +1,28 @@
+.accordion-element {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.accordeon-heading {
+    padding: 20px;
+    font-size: 20px;
+    border: 1px solid black;
+    background-color: aquamarine;
+    color: darkslategray;
+    cursor: pointer;
+}
+
+.accordeon-heading:active {
+    padding: 19px;
+    border: 2px solid black;
+    background-color: cyan;
+}
+
+.accordeon-body {
+    padding: 15px 38px;
+    font-size: 16px;
+    border: 1px dashed black;
+    background-color: darkgrey;
+    color: darkslategray;
+}
