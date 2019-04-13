@@ -16,7 +16,7 @@ Accordeon.prototype.setInitialValues = function () {
     for (let i=0; i<this.accordeonBody.length; i++) {
         this.accordeonBody[i].hidden = true;
         this.accordeonBody[i].setAttribute('index', i);
-        this.accordeonBody[i].setAttribute('count', 0);
+        this.accordeonBody[i].setAttribute('value', true);
     }
 }
 
@@ -48,12 +48,18 @@ Accordeon.prototype.toggle = function (index) {
 }
 
 //Получает значение счётчика для нажатого поля
-Accordeon.prototype.getCounterValue = function (index) {
+Accordeon.prototype.getValue = function (index) {
+    let value = this.accordeonBody[index].getAttribute('value');
 
-    let counterValue = this.accordeonBody[index].getAttribute('count');
-    this.accordeonBody[index].setAttribute('count', ++counterValue);
+    if (value == 'true') {
+        value = false;
+        this.accordeonBody[index].setAttribute('value', value);
+    } else {
+        value = true;
+        this.accordeonBody[index].setAttribute('value', value);
+    }
 
-    return counterValue;
+    return value;
 }
 
 //Обработчик
@@ -67,7 +73,7 @@ Accordeon.prototype.onGetBody = function (event) {
     //Вызов функции для сворачивания остальных пунктов меню
     if (this.config.collapseOther) this.toСollapseOther(itemIndexClicked);
     //Вызов close
-    else if (!(this.getCounterValue(itemIndexClicked)%2)) this.close(itemIndexClicked);
+    else if (this.getValue(itemIndexClicked)) {this.close(itemIndexClicked);}
 }
 
 const accordion = new Accordeon(
