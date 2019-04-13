@@ -47,7 +47,7 @@ Accordeon.prototype.toggle = function (index) {
     else this.accordeonBody[index].hidden = true
 }
 
-//Получает значение счётчика для нажатого поля
+//Получает значение для ветки вызова close
 Accordeon.prototype.getValue = function (index) {
     let value = this.accordeonBody[index].getAttribute('value');
 
