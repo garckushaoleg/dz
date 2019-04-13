@@ -1,19 +1,18 @@
 function Accordeon(el, config){
     this.el = el;
     this.config = config;
-
-    this.count = 0;
 }
+
 //Главная функция
 Accordeon.prototype.init = function () {
-    Accordeon.prototype.hiddenBody.call(this);
-    this.el.addEventListener('click', onGetBody.bind(this));
+    this.setInitialValues();
+    this.el.addEventListener('click', this.onGetBody.bind(this));
 }
 
-//Здесь я присваиваю индексы и счётчики
-Accordeon.prototype.hiddenBody = function () {
+//Здесь я задаю начальные значения для каждого тега
+Accordeon.prototype.setInitialValues = function () {
     this.accordeonBody = this.el.getElementsByClassName('accordeon-body');
-    
+
     for (let i=0; i<this.accordeonBody.length; i++) {
         this.accordeonBody[i].hidden = true;
         this.accordeonBody[i].setAttribute('index', i);
@@ -48,25 +47,27 @@ Accordeon.prototype.toggle = function (index) {
     else this.accordeonBody[index].hidden = true
 }
 
+//Получает значение счётчика для нажатого поля
+Accordeon.prototype.getCounterValue = function (index) {
+
+    let counterValue = this.accordeonBody[index].getAttribute('count');
+    this.accordeonBody[index].setAttribute('count', ++counterValue);
+
+    return counterValue;
+}
+
 //Обработчик
-function onGetBody(event) {
+Accordeon.prototype.onGetBody = function (event) {
 
     itemIndexClicked = event.target.nextElementSibling.getAttribute('index');
 
-    //Основное задание
-    if (this.config.collapseOther) Accordeon.prototype.toСollapseOther.call(this, itemIndexClicked);
-
-    //Дополнительное задание
     //Вызов open
-    Accordeon.prototype.open.call(this, itemIndexClicked);
-    let counterValue = this.accordeonBody[itemIndexClicked].getAttribute('count');
-    this.accordeonBody[itemIndexClicked].setAttribute('count', ++counterValue);
-    
+    this.open(itemIndexClicked);
+
+    //Вызов функции для сворачивания остальных пунктов меню
+    if (this.config.collapseOther) this.toСollapseOther(itemIndexClicked);
     //Вызов close
-    if (!this.config.collapseOther) {
-        let counterValue = this.accordeonBody[itemIndexClicked].getAttribute('count');
-        if (!(counterValue%2)) Accordeon.prototype.close.call(this, itemIndexClicked);
-    }
+    else if (!(this.getCounterValue(itemIndexClicked)%2)) this.close(itemIndexClicked);
 }
 
 const accordion = new Accordeon(
@@ -76,6 +77,8 @@ const accordion = new Accordeon(
 
 
 accordion.init();
-// accordion.open(1);
+
+// accordion.open(0);
 // accordion.close(0);
+// accordion.open(1);
 // accordion.toggle(1);
