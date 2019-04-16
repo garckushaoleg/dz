@@ -6,33 +6,38 @@ class Gallery{
         this.index = 0;
     }
 
+    //Главная
     init() {
         this.show(0);
         this.createRecursion();
     }
-
-    addArrow() {
+    
+    //Создаю стрелку
+    createArrow() {
         let arrow = document.createElement('img');
         arrow.classList = 'sizeArrow';
         return arrow
     }
-
+    
+    //Добавляю левую стрелку и навешиваю событие Предыдущий
     addArrowsLeft() {
-        let arrowLeft = this.addArrow();
+        let arrowLeft = this.createArrow();
         arrowLeft.setAttribute('src', 'img/back.svg');
         arrowLeft.addEventListener('click', this.prev.bind(this));
 
         return arrowLeft;
     }
 
+    //Добавляю правую стрелку и навешиваю событие Следующий
     addArrowsRigth() {
-        let arrowRight = this.addArrow();
+        let arrowRight = this.createArrow();
         arrowRight.setAttribute('src', 'img/next.svg');
         arrowRight.addEventListener('click', this.next.bind(this));
 
         return arrowRight;
     }
 
+    //Скрываю все лишки кроме одной
     show(index) {
         let element = this.element.children;
         element = Array.prototype.slice.call(element);
@@ -46,12 +51,14 @@ class Gallery{
         })
     }
 
+    //Вызываю Следующий в рекурсии
     createRecursion() {
         this.next();
 
         setTimeout(this.createRecursion.bind(this), this.delay.delay);
     }
 
+    //Следующий
     next() {
         if (this.index>(this.element.children.length-1)) {
             this.element.children[this.index-1].classList = 'close';
@@ -64,6 +71,7 @@ class Gallery{
         this.index++;
     }
 
+    //Предыдущий
     prev() {
         this.index--;
         if (!this.index) {
