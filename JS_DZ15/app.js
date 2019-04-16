@@ -1,26 +1,25 @@
 class Gallery{
     constructor(element, delay) {
         this.element = element;
-        this.delay = delay;
-
-        this.index = 0;
+        this.config = delay;
     }
 
     //Главная
     init() {
         this.show(0);
-        this.createRecursion();
+        this.callFunctionWithDelay();
     }
     
     //Создаю стрелку
     createArrow() {
         let arrow = document.createElement('img');
         arrow.classList = 'sizeArrow';
+
         return arrow
     }
     
-    //Добавляю левую стрелку и навешиваю событие Предыдущий
-    addArrowsLeft() {
+    //Создаю левую стрелку и навешиваю событие Предыдущий
+    createArrowsLeft() {
         let arrowLeft = this.createArrow();
         arrowLeft.setAttribute('src', 'img/back.svg');
         arrowLeft.addEventListener('click', this.prev.bind(this));
@@ -28,8 +27,8 @@ class Gallery{
         return arrowLeft;
     }
 
-    //Добавляю правую стрелку и навешиваю событие Следующий
-    addArrowsRigth() {
+    //Создаю правую стрелку и навешиваю событие Следующий
+    createArrowsRigth() {
         let arrowRight = this.createArrow();
         arrowRight.setAttribute('src', 'img/next.svg');
         arrowRight.addEventListener('click', this.next.bind(this));
@@ -37,54 +36,73 @@ class Gallery{
         return arrowRight;
     }
 
-    //Скрываю все лишки кроме одной
+    //Добавляю стрелки
+    addArrows() {
+        let liLast = document.createElement('li');
+        let liFirst = document.createElement('li');
+
+        liLast.appendChild(this.createArrowsRigth());
+        liFirst.appendChild(this.createArrowsLeft());
+
+        this.element.appendChild(liLast);
+        this.element.insertBefore(liFirst, this.element.children[0]);
+    }
+
+    //Показываю заданную картинку вместе с кнопками
     show(index) {
-        let element = this.element.children;
-        element = Array.prototype.slice.call(element);
+        this.addArrows();
+
+        let elements = this.element.children;
+        elements = Array.prototype.slice.call(elements);
 
         if (index !== undefined) this.index = index;
-        element.forEach((item, i) => {
-            item.firstChild.classList = 'sizeImg';
-            item.insertBefore(this.addArrowsLeft(), item.firstChild);
-            item.appendChild(this.addArrowsRigth());
-            if (i !== (this.index-1)) item.classList = 'close';
+
+        elements.forEach((item, i) => {
+
+            if((i == 0) || (i == (elements.length-1))) item.children[0].classList = 'sizeArrow'
+            else item.children[0].classList = 'sizeImg'
+
+            if ((i !== this.index) && (i !== 0) && (i !== (elements.length-1))) {
+                item.classList = 'close';
+            }
         })
     }
 
-    //Вызываю Следующий в рекурсии
-    createRecursion() {
+    //Вызов функции с задержкой
+    callFunctionWithDelay() {
         this.next();
 
-        setTimeout(this.createRecursion.bind(this), this.delay.delay);
+        setTimeout(this.callFunctionWithDelay.bind(this), this.config.delay);
     }
 
     //Следующий
     next() {
-        if (this.index>(this.element.children.length-1)) {
-            this.element.children[this.index-1].classList = 'close';
-            this.element.children[0].classList = 'open';
+        if (this.index == (this.element.children.length-2)) {
+            this.element.children[this.index].classList = 'close';
+            this.element.children[1].classList = 'open';
             this.index = 0;
-        } else this.element.children[this.index].classList = 'open';
+        } else this.element.children[this.index+1].classList = 'open';
 
-        if (this.index>0) this.element.children[this.index-1].classList = 'close';
-        
+        if (this.index>0) this.element.children[this.index].classList = 'close';
+
         this.index++;
     }
 
     //Предыдущий
     prev() {
-        this.index--;
-        if (!this.index) {
-            this.element.children[0].classList = 'close';
-            this.index = this.element.children.length;
+        if (this.index <= 1) {
+            this.element.children[1].classList = 'close';
+            this.index = this.element.children.length-1;
         } else this.element.children[this.index].classList = 'close';
-
+        
         this.element.children[this.index-1].classList = 'open';
+
+        this.index--;
     }
 }
 
 
-const myGallery = new Gallery(document.getElementById('container'), {delay: 4000});
+const myGallery = new Gallery(document.getElementById('container'), {delay: 3000});
 
 myGallery.init();
                     
