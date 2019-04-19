@@ -9,14 +9,14 @@ class Album {
     }
 
     addClassAndEventListener() {
-        this.element.classList = 'containerAlbum';
+        this.element.classList = 'container-album';
+        this.element.addEventListener('mouseover', this.onAddTopImage.bind(this));
 
         let elements = this.element.children;
         elements = Array.prototype.slice.call(elements);
 
         elements.forEach((item) => {
-            item.children[0].classList = 'bottomImg';
-            item.children[0].addEventListener('mouseover', this.onAddTopImage.bind(this));
+            item.children[0].classList = 'album-bottom-image';
         });
     }
 
@@ -25,12 +25,14 @@ class Album {
         this.topImage = document.createElement('img');
         li.appendChild(this.topImage);
         this.element.insertBefore(li, this.element.children[0]);
-        this.topImage.classList = 'topImg';
+        this.topImage.classList = 'album-top-image';
     }
 
     onAddTopImage(event) {
-        let src = event.target.getAttribute('src');
-        this.topImage.setAttribute('src', src);
+        if (event.target.classList == 'album-bottom-image') {
+            let src = event.target.src;
+            this.topImage.src = src;
+        }
     }
 }
 
