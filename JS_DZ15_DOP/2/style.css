@@ -1,0 +1,7 @@
+.classImg {
+    width: 600px;
+}
+
+.classImg:hover {
+    transform: rotate(180deg);
+}
