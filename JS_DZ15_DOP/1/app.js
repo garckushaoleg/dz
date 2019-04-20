@@ -11,11 +11,11 @@ class Square {
     }
 
     createSquare() {
-        let kvad = document.createElement('div');
-        kvad.classList = 'square';
-        kvad.textContent = 0;
+        let square = document.createElement('div');
+        square.classList = 'square';
+        square.textContent = 0;
 
-        return kvad
+        return square
     }
 
     addSquare() {
@@ -42,10 +42,10 @@ class Square {
     addValueCount(event) {
         this.arr.forEach((item, i) => {
             if (item == event.target) {
-                let j = this.count[i]; 
-                j++;
-                this.count[i] = j;
-                item.textContent = j;
+                let value = this.count[i]; 
+                value++;
+                this.count[i] = value;
+                item.textContent = value;
             }
         });
     }
