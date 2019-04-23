@@ -1,0 +1,25 @@
+.tabset-container {
+    display: flex;
+    cursor: pointer;
+}
+
+.tabset-element {
+    padding: 10px;
+    font-size: 24px;
+}
+
+.tabset-heading-activate {
+    color: coral;
+}
+
+.tabset-heading-deactivate {
+    color: white;
+}
+
+.tabset-body-open {
+    display: block;
+}
+
+.tabset-body-close {
+    display: none;
+}
