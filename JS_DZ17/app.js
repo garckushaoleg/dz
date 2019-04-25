@@ -1,28 +1,30 @@
 class Tabset{
     constructor(element) {
         this.element = element;
+        this.init();
     }
 
     //Перемещаем все body элементы
     moveBodyElements() {
         this.element.classList.add('tabset-container');
+
+        //Создаю контейнер для body
+        this.cntForDisplacedBodies = document.createElement('div');
+        document.body.appendChild(this.cntForDisplacedBodies);
+
         this.elements = Array.prototype.slice.call(this.element.children);
 
-        //Закрываю все body и перемещаю все body, кроме body первого пункта, в первый пункт
+        //Закрываю и перемещаю все body в контейнер
         this.elements.forEach ((item, i) => {
             let bodyElement = item.children[1];
             bodyElement.classList.add('tabset-body-close');
-            if (!i) {
-                return;
-            }
-            this.element.children[0].appendChild(bodyElement);
+            this.cntForDisplacedBodies.appendChild(bodyElement);
         })
     }
 
     //Показать Таб
     show(index) {
-        this.moveBodyElements();
-        
+    
         if (index == undefined) { 
             this.index = 0;
         }
@@ -35,49 +37,42 @@ class Tabset{
 
     //Инициализация
     init() {
+        this.moveBodyElements();
         this.show();
         this.element.addEventListener('click', this.onOpenTab.bind(this));
     }
 
     //Обработчик
-    onOpenTab() {
+    onOpenTab(event) {
         let parent = event.target.parentElement;
         
         //Узнаю индекс родительского элемента
-        this.elements.forEach((item, i ) => {
-            if (parent == item) {
-                this.index = i;
-            }
-        })
+        if (~this.elements.indexOf(parent)) {
+            this.index = this.elements.indexOf(parent);
+        }
 
         this.open();
     }
 
     //Открыть таб
     open() {
-        // Создаю массив из дочерних элементов первого пункта
-        this.elementsFirstItem = Array.prototype.slice.call(this.element.children[0].children);
+        
+        // Создаю массив из дочерних элементов контейнера перемещённых body
+        let cntForDisplacedBodies = Array.prototype.slice.call(this.cntForDisplacedBodies.children);
 
-        //Закрываю все дочерние элементы первого пункта кроме нулевого, т.е. кроме heading
-        this.elementsFirstItem.forEach((item, i) => {
-            if (!i) {
-                return;
-            }
+        //Закрываю все body
+        cntForDisplacedBodies.forEach((item, i) => {
             item.className = 'tabset-body tabset-body-close';
         })
 
         this.deactivateAllHeading();
 
         //Активирую необходивый heading и открываю необходимый body
-        this.elements.forEach((item, i ) => {
-            if (this.index == i) {
-                item.children[0].classList.remove('tabset-heading-deactivate');
-                item.children[0].classList.add('tabset-heading-activate');
+        this.elements[this.index].children[0].classList.remove('tabset-heading-deactivate');
+        this.elements[this.index].children[0].classList.add('tabset-heading-activate');
 
-                this.element.children[0].children[i+1].classList.remove('tabset-body-close');
-                this.element.children[0].children[i+1].classList.add('tabset-body-open');
-            }
-        })
+        cntForDisplacedBodies[this.index].classList.remove('tabset-body-close');
+        cntForDisplacedBodies[this.index].classList.add('tabset-body-open');
     }
 
     //Деактивировать все heading
@@ -113,8 +108,8 @@ class Tabset{
 
 const tabs = new Tabset(document.getElementById('container'));
 
-tabs.init();
-// tabs.show(2);
+
+// tabs.show(3);
 // tabs.next();
 // tabs.next();
 // tabs.prev();
