@@ -1,90 +1,88 @@
-class Users{
-  
-    constructor(element) {
-        this.element = element;
-        this.toggle = false;
+class Users {
 
-        this.init();
-    }
+  constructor(element) {
+    this.element = element;
 
-    init() {
-      this.tbody = this.element.getElementsByTagName('tbody')[0];
-      request('get', URL + PATH_USERS).then(response => this.displayUserData(response));
-      this.element.addEventListener('click', this.onUserRowClick.bind(this));
-    }
+    this.init();
+  }
 
-    //Отображаю данные о юзерах
-    displayUserData(responseObject) {
-        let userTemplate = document.getElementById('userTemplate').innerHTML;
+  init() {
+    this.tbody = this.element.getElementsByTagName('tbody')[0];
+    this.getDataAboutUsers();
+    this.element.addEventListener('click', this.onUserRowClick.bind(this));
+  }
 
-        let totalInternalHTML = responseObject.map((item) => {
+  //Получить данные о юзерах
+  getDataAboutUsers() {
+    request('get', URL + PATH_USERS).then(response => this.displayUserData(response));
+  }
 
-          return userTemplate
-                             .replace('{{id}}', item.id)
-                             .replace('{{name}}', item.name)
-                             .replace('{{phone}}', item.phone)
-                             .replace('{{email}}', item.email);
+  //Отображаю данные о юзерах
+  displayUserData(responseObject) {
+    let userTemplate = document.getElementById('userTemplate').innerHTML;
 
-        });
+    const totalInternalHTML = responseObject.map((item) => {
 
-        this.tbody.innerHTML = totalInternalHTML.join('\n');
-    }
+      return userTemplate
+        .replace('{{id}}', item.id)
+        .replace('{{name}}', item.name)
+        .replace('{{phone}}', item.phone)
+        .replace('{{email}}', item.email);
 
-    //Меняю бэкграунд строки
-    toggleBackground(e) {
-        let elements = Array.prototype.slice.call(this.tbody.children);
+    });
 
-        elements.forEach((item) => {
-            if (e.target.parentElement == item) {
-                item.style.backgroundColor = 'red';
-            } else 
-            {
-                item.style.backgroundColor = 'black';
-            }
-        })
-    }
+    this.tbody.innerHTML = totalInternalHTML.join('\n');
+  }
 
-    //Обработчик на получение постов и альбомов юзера
-    onUserRowClick(e) {
-        this.id = e.target.parentElement.dataset.userId;
+  //Меняю бэкграунд строки
+  toggleBackground(e) {
+    let elements = Array.prototype.slice.call(this.tbody.children);
 
-        this.toggleBackground(e);
+    elements.forEach((item) => {
+      if (e.target.parentElement == item) {
+        item.style.backgroundColor = 'red';
+      } else {
+        item.style.backgroundColor = 'black';
+      }
+    })
+  }
 
-        request('get', URL + PATH_POSTS + this.id)
-        .then(response => {
-            this.displayUserPosts(response); 
-            return request('get', URL + PATH_ALBUMS + this.id)
-        })
-        .then(response => this.displayUserAlbums(response));
+  //Обработчик на получение постов и альбомов юзера
+  onUserRowClick(e) {
+    this.id = e.target.parentElement.dataset.userId;
 
-        if (this.toggle) {
-            this.userPosts.innerHTML = '';
-            this.userAlbums.innerHTML = '';
-        }
-    }
-    
-    //Отображаю посты юзера
-    displayUserPosts(responseObject) {
-        this.userPosts = document.getElementById('userPosts');
+    this.toggleBackground(e);
 
-        responseObject.forEach((item) => {
-            this.toggle = true;
-            let li = document.createElement('li');
-            li.textContent = item.title;
-            this.userPosts.appendChild(li);
-        });
-    }
+    request('get', URL + PATH_POSTS + this.id)
+      .then(response => {
+        this.displayUserPosts(response);
+        return request('get', URL + PATH_ALBUMS + this.id)
+      })
+      .then(response => this.displayUserAlbums(response));
+  }
 
-    //Отображаю названия альбомов юзера
-    displayUserAlbums(responseObject) {
-        this.userAlbums = document.getElementById('userAlbums');
+  //Получить весь внутренний HTML
+  getWholeInternalHTML(responseObject) {
+    const totalInternalHTML = responseObject.map((item) => {
+      return `<li>${item.title}</li>`;
+    });
 
-        responseObject.forEach((item) => {
-            let li = document.createElement('li');
-            li.textContent = item.title;
-            this.userAlbums.appendChild(li);
-        });
-    }
+    return totalInternalHTML.join('\n')
+  }
+
+  //Отображаю посты юзера
+  displayUserPosts(responseObject) {
+    this.userPosts = document.getElementById('userPosts');
+
+    this.userPosts.innerHTML = this.getWholeInternalHTML(responseObject);
+  }
+
+  //Отображаю названия альбомов юзера
+  displayUserAlbums(responseObject) {
+    this.userAlbums = document.getElementById('userAlbums');
+
+    this.userAlbums.innerHTML = this.getWholeInternalHTML(responseObject);
+  }
 }
 
 const URL = 'https://jsonplaceholder.typicode.com/';
@@ -93,29 +91,29 @@ const PATH_POSTS = 'posts?userId=';
 const PATH_ALBUMS = 'albums?userId=';
 
 
-function request (method, url) {
-    return new Promise(function (resolve, reject) {
-      var xhr = new XMLHttpRequest();
-      xhr.open(method, url);
-      xhr.onload = function () {
-        if (this.status >= 200 && this.status < 300) {
-          resolve(JSON.parse(xhr.response));
-        } else {
-          reject({
-            status: this.status,
-            statusText: xhr.statusText
-          });
-        }
-      };
-      xhr.onerror = function () {
+function request(method, url) {
+  return new Promise(function (resolve, reject) {
+    var xhr = new XMLHttpRequest();
+    xhr.open(method, url);
+    xhr.onload = function () {
+      if (this.status >= 200 && this.status < 300) {
+        resolve(JSON.parse(xhr.response));
+      } else {
         reject({
           status: this.status,
           statusText: xhr.statusText
         });
-      };
-      xhr.send();
-    });
-  }
+      }
+    };
+    xhr.onerror = function () {
+      reject({
+        status: this.status,
+        statusText: xhr.statusText
+      });
+    };
+    xhr.send();
+  });
+}
 
-const usersList = new Users( document.getElementById('usersListTable') );
+const usersList = new Users(document.getElementById('usersListTable'));
 
