@@ -1,0 +1,15 @@
+.table-footer {
+    text-align: center;
+}
+
+.background-tr {
+    background-color: red;
+}
+
+.u-full-width {
+    cursor: pointer;
+}
+
+button[delete-button] {
+    background-color: white;
+}

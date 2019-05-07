@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Contacts</title>
+    <link rel="stylesheet" href="skeleton.css">
+    <link rel="stylesheet" href="normalize.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="app.js" async></script>
+</head>
+<body>
+<table class="u-full-width">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Surname</th>
+            <th>Email</th>
+            <th>Phone</th>
+        </tr>
+    </thead>
+
+    <tbody id="contactList"></tbody>
+
+    <tfoot>
+        <tr>
+            <td>
+                        
+            </td>
+            <td>
+                <input type="text" id='nameInput'>
+            </td>
+            <td>
+                <input type="text" id='surnameInput'>
+            </td>
+            <td>
+                <input type="text" id='emailInput'>
+            </td>
+            <td>
+                <input type="text" id='phoneInput'>
+            </td>
+        </tr>
+        <tr">
+        <td colspan="5" class="table-footer">
+            <button id="addContactBtn">Add Contact</button>
+        </td>
+    </tr>
+    </tfoot>
+</table>
+<script type="text/template" id="contactTemplate">
+    <tr>
+            <td>{{id}}</td>
+            <td>{{name}}</td>
+            <td>{{surname}}</td>
+            <td>{{email}}</td>
+            <td>{{phone}}</td>
+            <td><button delete-button>Delete</button></td>
+    </tr>
+</script>
+</body>
+</html>
