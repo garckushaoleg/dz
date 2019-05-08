@@ -31,20 +31,20 @@ function submitContact() {
         phone: contactPhoneInput.value,
         is_active: true
     }
-    addContactOnServer(contact);
+    addContactOnServer(contact).then(getContacts);
     resetContactForm();
 }
 
 //Добавляем контакт на сервер
 function addContactOnServer(contact) {
-    fetch(URL, {
+    return fetch(URL, {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(contact)
-    }).then(getContacts)
+    })
 }
 
 //Получаем контакты юзеров с сервера
@@ -54,17 +54,24 @@ function getContacts() {
 
 //Отображаем полученные контакты
 function displayContacts(contacts) {
+    let tr;
 
     contactList.innerHTML = contacts.map(
-        item => contactTemplate.replace('{{id}}', item.id || '-')
-                               .replace('{{name}}', item.name || '-')
-                               .replace('{{surname}}', item.surname || '-')
-                               .replace('{{email}}', item.email || '-')
-                               .replace('{{phone}}', item.phone || '-')).join('\n');
+        item => {
+
+            if (!item.is_active) {
+                tr = contactTemplate.replace('{{class}}', 'class="background-tr"')
+            } else {
+                tr = contactTemplate.replace('{{class}}', '')
+            }
+
+            return tr.replace('{{id}}', item.id || '-')
+                     .replace('{{name}}', item.name || '-')
+                     .replace('{{surname}}', item.surname || '-')
+                     .replace('{{email}}', item.email || '-')
+                     .replace('{{phone}}', item.phone || '-')}).join('\n');
 
     contactArr = contacts;
-
-    toggleBackground();
 }
 
 //Приводим содержимое форм к дефолту
@@ -75,49 +82,32 @@ function resetContactForm() {
     contactPhoneInput.value = '';
 }
 
-//Обработчик на клик 
+//Обработчик на клик по строке
 function onLineClick(e) {
     let id = e.target.parentElement.children[0].textContent;
 
-    rewriteLineOnServer(id);
+    changeValueToOpposite(id);
 }
 
-//Перезаписываем строку на сервере
-function rewriteLineOnServer(id) {
+//Изменяем значение is_active на противоположное
+function changeValueToOpposite(id) {
     contactArr.forEach(item => {
         if (item.id == id) {
             item.is_active = !item.is_active;
-            fetch(URL + '/' + id, {
-                method: 'PUT',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(item)
-            }).then(toggleBackground);
+            rewriteLineOnServer(id, item).then(getContacts);
         }
     })
 }
 
-
-//Переключаем бэкграунд
-function toggleBackground() {
-    let arrElements = Array.prototype.slice.call(contactsList.children);
-
-    contactArr.forEach((item) => {
-        if (!item.is_active) {
-
-            arrElements.forEach((elem) => {
-                if (elem.children[0].textContent == item.id) elem.classList.add('background-tr')
-            })
-
-        } else {
-            arrElements.forEach((elem) => {
-                if (elem.children[0].textContent == item.id) elem.classList.remove('background-tr')
-            })
-
-        }
-
+//Перезаписываем строку на сервере
+function rewriteLineOnServer(id, item) {
+    return fetch(URL + '/' + id, {
+        method: 'PUT',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(item)
     })
 }
 
@@ -131,13 +121,13 @@ function getId(element) {
     if (element.hasAttribute('delete-button')) {
         let tr = element.parentElement.parentElement;
         let id = tr.children[0].textContent;
-        deleteLineOnServer(id);
+        deleteLineOnServer(id).then(getContacts);
     }
 }
 
 //Удаляем строку на сервере
 function deleteLineOnServer(id) {
-    fetch(URL + '/' + id, {
+    return fetch(URL + '/' + id, {
         method: 'DELETE'
-    }).then(getContacts);
+    });
 }
