@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/skeleton.css">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="app.js" async></script>
+    <title>Contacts</title>
+</head>
+
+<body>
+    <table class="u-full-width">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Email</th>
+                <th>Phone</th>
+            </tr>
+        </thead>
+
+        <tbody id="contactList"></tbody>
+
+        <tfoot>
+            <tr>
+                <td>
+
+                </td>
+                <td>
+                    <input type="text" id='nameInput'>
+                </td>
+                <td>
+                    <input type="text" id='surnameInput'>
+                </td>
+                <td>
+                    <input type="text" id='emailInput'>
+                </td>
+                <td>
+                    <input type="text" id='phoneInput'>
+                </td>
+            </tr>
+            <tr">
+                <td colspan="5" class="table-footer">
+                    <button id="addContactBtn">Add Contact</button>
+                </td>
+                </tr>
+        </tfoot>
+    </table>
+    <script type="text/template" id="contactTemplate">
+    <tr>
+            <td>{{id}}</td>
+            <td>{{name}}</td>
+            <td>{{surname}}</td>
+            <td>{{email}}</td>
+            <td>{{phone}}</td>
+            <td><button delete-button>Delete</button></td>
+            <td><button edit-button>Edit</button></td>
+    </tr>
+</script>
+
+    <script type="text/template" id="editForm">
+    <tr>
+        <td>
+            {{id}}  
+        </td>
+        <td>
+            <input type="text" id='nameSaveInput' placeholder='{{placeholderName}}'>
+        </td>
+        <td>
+            <input type="text" id='surnameSaveInput' placeholder='{{placeholderSurname}}'>
+        </td>
+        <td>
+            <input type="text" id='emailSaveInput' placeholder='{{placeholderEmail}}'>
+        </td>
+        <td>
+            <input type="text" id='phoneSaveInput' placeholder='{{placeholderPhone}}'>
+        </td>
+        <td><button save-button>Save</button></td>
+    </tr>
+</script>
+    <script type="text/template" id="popup">
+        <li>id: <span>{{id}}</span></li>
+        <li>name: <span>{{name}}</span></li>
+        <li>surname: <span>{{surname}}</span></li>
+        <li>email: <span>{{email}}</span></li>
+        <li>phone: <span>{{phone}}</span></li>
+        <li class="close-button"></li>
+</script>
+</body>
+
+</html>

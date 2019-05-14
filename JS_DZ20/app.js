@@ -37,6 +37,7 @@ function submitContact() {
 
 //Добавляем контакт на сервер
 function addContactOnServer(contact) {
+    console.log(contact);
     return fetch(URL, {
         method: 'POST',
         headers: {
