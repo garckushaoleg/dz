@@ -9,28 +9,25 @@ const contactPhoneInput = document.getElementById('phoneInput');
 
 const contactTemplate = document.getElementById('contactTemplate').innerHTML;
 const editForm = document.getElementById('editForm').innerHTML;
-const popup = document.getElementById('popup').innerHTML;
-
-let editableString; // запоминаем какую строку редактируем
+const popupTemplate = document.getElementById('popup').innerHTML;
 
 init();
 
 function init() {
-    addContactBtn.addEventListener('click', onClickOnAddButton);
-    contactsList.addEventListener('click', onLineClick);
-    contactsList.addEventListener('click', onClickOnDeleteButton);
-    contactsList.addEventListener('click', onClickOnEditButton);
-    contactsList.addEventListener('click', onClickOnSaveButton);
-    document.body.addEventListener('click', onClickOnCloseButton);
+    addContactBtn.addEventListener('click', onAddButtonClick);
+    contactsList.addEventListener('click', assignHandlersToEvent);
+}
+
+//Назначаю обработчики на событие
+function assignHandlersToEvent(e) {
+    onLineClick(e); 
+    onDeleteButtonClick(e); 
+    onEditButtonClick(e); 
+    onSaveButtonClick(e);
 }
 
 //Обработчик на клик по кнопке добавления
-function onClickOnAddButton() {
-    submitContact();
-}
-
-//Добавляем контакт
-function submitContact() {
+function onAddButtonClick() {
     const contact = {
         name: contactNameInput.value,
         surname: contactSurnameInput.value,
@@ -66,7 +63,8 @@ function displayContacts(contacts) {
     contactList.innerHTML = contacts.map(
         item => {
 
-            return contactTemplate.replace('{{id}}', item.id)
+            return contactTemplate.replace('{{data-id}}', item.id)
+                                  .replace('{{id}}', item.id)
                                   .replace('{{name}}', item.name || '-')
                                   .replace('{{surname}}', item.surname || '-')
                                   .replace('{{email}}', item.email || '-')
@@ -84,9 +82,9 @@ function resetContactForm() {
 
 //Обработчик на клик по строке
 function onLineClick(e) {
-    let id = e.target.parentElement.children[0].textContent;
+    let id = e.target.parentElement.dataset.id;
 
-    if (~e.target.parentElement.innerHTML.indexOf('td')) {
+    if (e.target.parentElement.hasAttribute('data-id')) {
         getContactById(id);
     }
 }
@@ -102,11 +100,13 @@ function displayContact(response) {
     ul.classList.add('popup');
     document.body.appendChild(ul);
 
-    ul.innerHTML = popup.replace('{{id}}', response.id)
+    ul.innerHTML = popupTemplate.replace('{{id}}', response.id)
                         .replace('{{name}}', response.name)
                         .replace('{{surname}}', response.surname)
                         .replace('{{email}}', response.email)
                         .replace('{{phone}}', response.phone);
+
+    document.body.addEventListener('click', onClickOnCloseButton);
 }
 
 //Обработчик на клик по кнопке закрытия
@@ -117,7 +117,7 @@ function onClickOnCloseButton(e) {
 }
 
 //Обработчик на клик по кнопке удаления
-function onClickOnDeleteButton(e) {
+function onDeleteButtonClick(e) {
     if (e.target.hasAttribute('delete-button')) {
         deleteLineOnServer(getId(e.target)).then(getContacts);
     }
@@ -125,8 +125,7 @@ function onClickOnDeleteButton(e) {
 
 //Получаем айди
 function getId(element) {
-    let tr = element.parentElement.parentElement;
-    let id = tr.children[0].textContent.trim();
+    let id = element.parentElement.parentElement.dataset.id;
     return id
 }
 
@@ -138,8 +137,8 @@ function deleteLineOnServer(id) {
 }
 
 //Обработчик на клик по кнопке редактирования
-function onClickOnEditButton(e) {
-    editableString = e.target.parentElement.parentElement; //запомнили строку
+function onEditButtonClick(e) {
+    let editableString = e.target.parentElement.parentElement; //запомнили строку
 
     if (e.target.hasAttribute('edit-button')) {
         fetch(URL + '/' + getId(e.target)).then(response => response.json())
@@ -157,7 +156,7 @@ function addFormToEdit(contact, tr) {
 }
 
 //Обработчик на клик по кнопке сохранения
-function onClickOnSaveButton(e) {
+function onSaveButtonClick(e) {
     if (e.target.hasAttribute('save-button')) {
 
         saveEditedContact(getId(e.target));
@@ -180,8 +179,8 @@ function saveEditedContact(idValue) {
         is_active: true
     }
 
-    saveEditedContactToServer(contact).then(response => response.json())
-                                      .then(response => getEditedContact(response.id));
+    saveEditedContactToServer(contact).then(getContacts);
+                                      
 }
 
 //Сохранить отредактированный контакт на сервере
@@ -194,19 +193,4 @@ function saveEditedContactToServer(contact) {
         },
         body: JSON.stringify(contact)
     })
-}
-
-//Получить отредактированный контакт
-function getEditedContact(id) {
-    fetch(URL + '/' + id).then(response => response.json())
-                         .then(response => displayEditedContact(response, editableString));
-}
-
-//Показать отредактированный контакт
-function displayEditedContact(contact, tr) {
-    tr.innerHTML = contactTemplate.replace('{{id}}', contact.id)
-                                  .replace('{{name}}', contact.name || '-')
-                                  .replace('{{surname}}', contact.surname || '-')
-                                  .replace('{{email}}', contact.email || '-')
-                                  .replace('{{phone}}', contact.phone || '-');
 }
