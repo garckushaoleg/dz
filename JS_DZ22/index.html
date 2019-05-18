@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://code.jquery.com/jquery-1.12.4.js" defer></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" defer></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+			  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+              crossorigin="anonymous"></script>
+    <script src="app.js" async></script>
+    <link rel="stylesheet" href="css/skeleton.css">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <title>Sticker</title>
+</head>
+<body>
+    <button id="add">Добавить</button>
+    <div id="area" class="stickers-area"></div>
+
+<script type="text/template" id="add-form">
+    <div class="form">
+        <input type="text" id="title">
+        <textarea id="description" cols="30" rows="10"></textarea>
+        <button id="save">Сохранить</button>
+        <button id="cancel">Отмена</button>
+    </div>
+</script>
+
+<script type="text/template" id="sticker">
+    <div class="sticker-content" id="{{id}}">
+        <span class="sticker-title">{{sticker-title}}<span class="close-button"></span></span>
+        <span class="sticker-description">{{sticker-description}}</span>
+    </div>
+</script>
+</body>
+</html>
