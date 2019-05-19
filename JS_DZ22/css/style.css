@@ -1,3 +1,7 @@
+.add-button {
+    position: absolute;
+}
+
 .form {
     border: 1px solid black;
     max-width: 400px;
@@ -8,7 +12,7 @@
     justify-content: space-around;
     align-items: center;
     margin-top: 20px;
-    position: relative;
+    position: absolute;
     left: 50%;
     transform: translate(-50%, 0);
 }
@@ -16,7 +20,6 @@
 .stickers-area {
     display: flex;
     flex-wrap: wrap;
-
 }
 
 .sticker-content {
@@ -30,7 +33,7 @@
     font-size: 34px;
     margin-right: 20px;
     margin-top: 40px;
-    position: relative;
+    position: absolute;
 }
 
 .close-button {
