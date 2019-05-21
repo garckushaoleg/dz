@@ -1,9 +1,9 @@
 $(function () {
-    const URL = 'http://fep-app.herokuapp.com/api/contacts';
-    const contactTemplate = $('#contactTemplate').html();
-    let dialog, form, idOfEditedItem,
+    const URL = 'http://fep-app.herokuapp.com/api/contacts',
+        contactTemplate = $('#contactTemplate').html(),
         emailRegex = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/,
-        phoneRegex = /^((8|\+3)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/,
+        phoneRegex = /^((8|\+3)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/;
+    let dialog, form,
         name = $("#name"),
         surname = $("#surname"),
         email = $("#email"),
@@ -12,7 +12,8 @@ $(function () {
         dialogForm = $("#dialog-form"),
         createUserButton = $("#create-user"),
         allFields = $([]).add(name).add(surname).add(email).add(phone),
-        tips = $(".validateTips");
+        tips = $(".validateTips"),
+        hiddenField = $("#hidden-field");
 
     //Приводим содержимое форм к дефолту
     function resetContactForm() {
@@ -73,44 +74,54 @@ $(function () {
     function onCreateButtonClick() {
         if (validate()) {
 
-            if (idOfEditedItem) {
-                let contact = {
-                    id: idOfEditedItem,
-                    name: name.val(),
-                    surname: surname.val(),
-                    email: email.val(),
-                    phone: phone.val(),
-                    is_active: true
-                }
-                $.ajax({
-                    url: URL + '/' + idOfEditedItem,
-                    type: "PUT",
-                    data: JSON.stringify(contact),
-                    contentType: "application/json",
-                    dataType: "json",
-                    success: getContacts
-                })
+            if (hiddenField.data('idOfEditedItem')) {
+                saveEditedContactToServer();
 
             } else {
-                const contact = {
-                    name: name.val(),
-                    surname: surname.val(),
-                    email: email.val(),
-                    phone: phone.val(),
-                    is_active: true
-                }
-
-                $.ajax({
-                    url: URL,
-                    type: "POST",
-                    data: JSON.stringify(contact),
-                    contentType: "application/json",
-                    dataType: "json",
-                    success: getContacts
-                })
+                saveContactToServer();
             }
-            idOfEditedItem = 0;
+            hiddenField.data('idOfEditedItem', 0);
         }
+    }
+
+    //Сохранить отредактированный контакт на сервере
+    function saveEditedContactToServer() {
+        let contact = {
+            id: hiddenField.data('idOfEditedItem'),
+            name: name.val(),
+            surname: surname.val(),
+            email: email.val(),
+            phone: phone.val(),
+            is_active: true
+        }
+        $.ajax({
+            url: URL + '/' + hiddenField.data('idOfEditedItem'),
+            type: "PUT",
+            data: JSON.stringify(contact),
+            contentType: "application/json",
+            dataType: "json",
+            success: getContacts
+        })
+    }
+
+    //Сохранить контакт на сервере
+    function saveContactToServer() {
+        let contact = {
+            name: name.val(),
+            surname: surname.val(),
+            email: email.val(),
+            phone: phone.val(),
+            is_active: true
+        }
+
+        $.ajax({
+            url: URL,
+            type: "POST",
+            data: JSON.stringify(contact),
+            contentType: "application/json",
+            dataType: "json",
+            success: getContacts
+        })
     }
 
     //Получаем контакты с сервера
@@ -155,7 +166,7 @@ $(function () {
     function onEditButtonClick(event) {
         dialog.dialog("open");
 
-        idOfEditedItem = getId(event.target);
+        hiddenField.data('idOfEditedItem', getId(event.target));
 
         jQuery.get(URL + '/' + getId(event.target)).done(response => displayCurrentContact(response));
     }
@@ -170,9 +181,9 @@ $(function () {
 
     //Получаем айди
     function getId(element) {
-        let id = $(element).parent().parent().data('id');
-        return id
+        return $(element).closest('tr[data-id]').data('id');
     }
+
 
     resetContactForm();
     dialog = dialogForm.dialog({
