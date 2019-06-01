@@ -9,9 +9,10 @@ export default class ToDoController{
         this.view = new TodoView('#contact-list');
         
         this.displayContacts();
-        this.collection.display = () => this.displayContacts();
+        this.displayContacts = this.displayContacts.bind(this);
 
-        this.view.onClick = (id) => this.collection.deleteLineOnServer(id);
+        this.view.onClick = (id) => this.collection.deleteLineOnServer(id)
+        .then(this.displayContacts);
     }
 
     //Отображаем список контактов

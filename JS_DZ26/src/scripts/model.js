@@ -15,8 +15,8 @@ export default class ToDoModel {
         Object.assign(this, data);
     }
 
-    delete(url) {
-        return fetch(url, {
+    delete() {
+        return fetch(`${this.url}/${this.id}`, {
             method: 'DELETE'
         })
     }

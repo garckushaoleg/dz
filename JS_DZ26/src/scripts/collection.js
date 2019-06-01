@@ -22,12 +22,14 @@ export default class ToDoCollection {
         return this.list = list.map(el => new ToDoModel(this.url, el));
     }
 
-    get(id) {
-        return this.list.find(el => el.id == id);
-    }
-
     //Удаляем строку на сервере
     deleteLineOnServer(id) {
-        this.model.delete(this.url + '/' + id).then(this.display);
+        let model = new ToDoModel(this.url, this.getArrayElement(id));
+        return model.delete();
+    }
+
+    //Получить элемент массива
+    getArrayElement(id) {
+        return this.list.find(el => el.id == id);
     }
 }
