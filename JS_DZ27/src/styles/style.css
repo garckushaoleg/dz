@@ -1,0 +1,19 @@
+.table-footer {
+    text-align: center;
+}
+
+.u-full-width {
+    cursor: pointer;
+}
+
+.completed-task {
+    background-color: green;
+}
+
+.incomplete-task {
+    background-color: yellow;
+}
+
+button[delete-button] {
+    background-color: white;
+}
