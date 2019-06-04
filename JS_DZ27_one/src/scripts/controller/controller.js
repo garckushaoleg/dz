@@ -1,24 +1,32 @@
-import ToDoCollection from './collection';
-import config from './config';
-import TodoView from './view';
+import ToDoCollection from '../model/collection';
+import config from '../config';
+import TodoView from '../view/view';
+import Table from '../view/table';
+import Line from '../view/line';
+import Delete from '../view/delete';
+import Add from '../view/add';
 
 export default class ToDoController{
     constructor(){
+        this.table = new Table();
 
         this.collection = new ToDoCollection(config.contactsUrl);
+        this.line = new Line('#contactList');
+        this.delete = new Delete('#contactList');
+        this.add = new Add('#contactList');
         this.view = new TodoView('#contactList');
         
         this.displayContacts();
         this.displayContacts = this.displayContacts.bind(this);
 
-        this.view.onClickOnButton = (id) => this.collection.deleteLineOnServer(id)
+        this.delete.onClickOnButton = (id) => this.collection.deleteLineOnServer(id)
         .then(this.displayContacts);
 
-        this.view.onClickOnLine = (id) => 
+        this.line.onClickOnLine = (id) => 
         this.collection.rewriteLineOnServer(id, this.getTask(id))
         .then(this.displayContacts);
 
-        this.view.onClickButtonAdd = (data) => this.collection.addContactOnServer(data)
+        this.add.onClickButtonAdd = (data) => this.collection.addContactOnServer(data)
         .then(this.displayContacts);
     }
 
