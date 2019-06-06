@@ -6,11 +6,11 @@
     cursor: pointer;
 }
 
-.completed-task {
+.completed-todo {
     background-color: green;
 }
 
-.incomplete-task {
+.incomplete-todo {
     background-color: yellow;
 }
 

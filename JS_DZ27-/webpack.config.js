@@ -8,7 +8,9 @@ module.exports = {
     filename: 'app.js',
     path: path.resolve(__dirname, 'dist')
   },
-  plugins: [new HtmlWebpackPlugin()],
+  plugins: [new HtmlWebpackPlugin({
+    title: 'Todo лист на mvc'
+  })],
   devServer: {
     contentBase: './dist'
   },

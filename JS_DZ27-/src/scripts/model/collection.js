@@ -1,6 +1,6 @@
-import ToDoModel from "./model";
+import TodoListModel from "./model";
 
-export default class ToDoCollection {
+export default class TodoListCollection {
     constructor(url) {
         this.url = url;
         this.list = [];
@@ -8,8 +8,6 @@ export default class ToDoCollection {
         this.setData = this.setData.bind(this);
 
         this.fetch = this.fetch.bind(this);
-
-        this.model = new ToDoModel();
     }
 
     fetch() {
@@ -19,13 +17,13 @@ export default class ToDoCollection {
     }
 
     setData(list) {
-        return this.list = list.map(el => new ToDoModel(this.url, el));
+        return this.list = list.map(el => new TodoListModel(this.url, el));
     }
 
     //Удаляем строку на сервере
     deleteLineOnServer(id) {
-        let model = new ToDoModel(this.url, this.getArrayElement(id));
-        return model.delete();
+        let model = new TodoListModel(this.url, this.getArrayElement(id));
+	    return model.delete();
     }
 
     //Получить элемент массива
@@ -35,13 +33,13 @@ export default class ToDoCollection {
 
     //Перезаписываем строку на сервере
     rewriteLineOnServer(id) {
-        let model = new ToDoModel(this.url, this.getArrayElement(id));
+        let model = new TodoListModel(this.url, this.getArrayElement(id));
         return model.rewrite();
     }
 
-    //Добавляем контакт на сервер
-    addContactOnServer(contact) {
-        let model = new ToDoModel(this.url, contact);
+    //Добавляем тудушку на сервер
+    addTodoOnServer(todo) {
+        let model = new TodoListModel(this.url, todo);
         return model.write();
     }
 }

@@ -1,9 +1,9 @@
 import $ from 'jquery';
 
-export default class View {
-    constructor(elId) {
+export default class TodoListView {
+    constructor() {
         this.displayList();
-        this.$el = $(elId);
+        this.$el = $('#todoList');
 
         this.render = this.render.bind(this);
 
@@ -24,7 +24,7 @@ export default class View {
                 </tr>
             </thead>
         
-            <tbody id="contactList"></tbody>
+            <tbody id="todoList"></tbody>
         </table>`
         );
 
@@ -48,16 +48,16 @@ export default class View {
     }
 
     renderItem(el) {
-        let task = (el.isDone) ? "completed-task" : "incomplete-task";
+        let todo = (el.isDone) ? "completed-todo" : "incomplete-todo";
 
-        return `<tr data-id="${el.id}" class=${task}>
+        return `<tr data-id="${el.id}" class=${todo}>
                 <td>${el.id}</td>
                 <td>${el.title}</td>
                 <td><button delete-button>Delete</button></td>
                 </tr>`
     }
 
-    resetContactForm() {
+    resetTodoList() {
         $('#title').val('');
     }
 }

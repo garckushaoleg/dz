@@ -1,6 +1,6 @@
 let url = new WeakMap;
 
-export default class ToDoModel {
+export default class TodoListModel {
 
     get url() {
         return url.get(this);
