@@ -1,0 +1,22 @@
+.game-ball{
+    max-width: 1400px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.game-ball div:nth-child(2) label {
+    color: red;
+    font-size: 20px;
+}
+
+.game-ball div:nth-child(3) label {
+    color: green;
+    font-size: 22px;
+}
+
+.game-ball-frame{
+    border: 1px solid black;
+}
