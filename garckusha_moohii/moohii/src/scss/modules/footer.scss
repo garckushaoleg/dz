@@ -1,0 +1,228 @@
+.footer {
+    width: 100%;
+    height: 346px;
+    padding: 0 150px;
+    display: flex;
+    justify-content: center;
+    border-top: 1px solid #C4C4C4;
+    position: relative;
+
+    .footer-ctn {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        max-width: 1620px;
+        height: 330px;
+        width: 100%;
+       
+
+        .footer-ctn-top {
+            height: 230px;
+            max-width: 1620px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+    
+            .footer-ctn-left {
+                max-width: 550px;
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+    
+                ul {
+                    &:nth-child(1) {
+                        display: flex;
+                        flex-direction: column;
+                        flex-wrap: wrap;
+                        height: 150px;
+                        max-width: 350px;
+                        width: 100%;
+                        font-family: Bebas Neue;
+                        font-size: 18px;
+                        line-height: 18px;
+
+                        li {
+                            &:hover {
+                                color: #828282;
+                                cursor: pointer;
+                            }
+                        }
+                    }
+    
+                    &:nth-child(2) {
+                        font-family: Verdana;
+                        font-size: 14px;
+                        line-height: 160%;
+
+                        li {
+                            &:hover {
+                                color: #828282;
+                                cursor: pointer;
+                            }
+                        }
+                    }
+                }
+            }
+    
+            .footer-ctn-middle {
+                display: flex;
+                justify-content: center;
+    
+                ul {
+                    li {
+                        &:nth-child(1) {
+                            font-family: Verdana;
+                            font-size: 18px;
+                            line-height: 160%;
+                            margin-bottom: 10px;
+                        }
+    
+                        &:nth-child(2), &:nth-child(3) {
+                            font-family: Verdana;
+                            font-size: 12px;
+                            line-height: 140%;
+                            color: #828282;
+                        }
+    
+                        &:nth-child(4), &:nth-child(5) {
+                            font-family: Verdana;
+                            font-size: 14px;
+                            line-height: 160%;
+                            padding: 7px 33px;
+                            border: 1px solid #F94877;
+                            cursor: pointer;
+                            margin-top: 27px;
+    
+                            &:hover {
+                                color: #FC104F;
+                            }
+                        }
+                    }
+                }
+            }
+    
+            .footer-ctn-right {
+                display: flex;
+                justify-content: center;
+                
+    
+                ul {
+                    display: flex;
+                    flex-direction: column;
+                    
+                    li {
+                        &:nth-child(1) {
+                            font-family: Verdana;
+                            font-size: 14px;
+                            line-height: 160%;
+                            color: #828282;
+                        }
+    
+                        &:nth-child(2) {
+                            display: flex;
+                            max-width: 150px;
+                            width: 100%;
+                            justify-content: space-between;
+                            align-items: center;
+                            margin-top: 14px;
+    
+                            span {
+                                &:nth-child(1) {
+                                    width: 60px;
+                                    height: 20px;
+                                    background: url(../img/cart/visa.svg)
+                                }
+    
+                                &:nth-child(2) {
+                                    width: 63px;
+                                    height: 37px;
+                                    background: url(../img/cart/mastercard.svg)
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    
+        .footer-ctn-bottom {
+            align-self: flex-start;
+
+            .footer-ctn-middle-tablet {
+                display: none;
+            }
+
+            ul {
+                li {
+                    &:nth-child(1) {
+                        display: flex;
+                        align-items: flex-start;
+    
+                        span {
+                            &:nth-child(1) {
+                                background: url(../img/icons/logo.svg) center/cover;
+                                width: 116.79px;
+                                height: 46.72px;
+                                cursor: pointer;
+                            }
+        
+                            &:nth-child(2) {
+                                font-family: Verdana;
+                                font-size: 10px;
+                                line-height: 213.6%;
+                                color: #FFFFFF;
+                                padding: 0px 10px;
+                                background-color: #F94877;
+                                cursor: pointer;
+                            }
+        
+                        }
+                    }
+
+                    &:nth-child(2) {
+                        font-family: Verdana;
+                        font-size: 12px;
+                        line-height: 160%;
+
+                        span {
+                            &:nth-child(1) {
+                                color: #828282;
+                            }
+
+                            &:nth-child(2) {
+                                color: #F94877;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .vektor {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        right: 70px;
+        top: 50%;
+        transform: translate(0, -50%);
+        border: 1px solid #828282;
+        cursor: pointer;
+
+        span {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 20px;
+            height: 30px;
+            background: url(../img/icons/vector.svg) center/cover;
+        }
+    }
+}
+
+.footer-mini {
+    display: none;
+}
