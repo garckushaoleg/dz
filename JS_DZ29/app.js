@@ -6,32 +6,22 @@ let ctx = canvas.getContext("2d");
 let color = document.getElementById('color');
 let range = document.getElementById('range');
 
-
-let ballPayload;
 let allBalls = new Map();
 
-let initialRadius = 10;
-let xAxisStep = 0;
-let yAxisStep = 0;
-
-let stepDirection;
+const MY_BALL_PAYLOAD = {
+    x: 10, 
+    y: 10, 
+    radius: range.value, 
+    color: color.value
+};
 
 socket.onopen = function () {
-    let dataPacket = {
-        action: 'move',
-        payload: { x: 0, y: 0 }
-    }
-    socket.send(JSON.stringify(dataPacket));
+    socket.send(JSON.stringify(createPackageMove(MY_BALL_PAYLOAD.x, MY_BALL_PAYLOAD.y)));
 
-    dataPacket = {
-        action: 'setState',
-        payload: { radius: range.value, color: color.value }
-    }
-
-    socket.send(JSON.stringify(dataPacket));
+    socket.send(JSON.stringify(createPackageSetState(MY_BALL_PAYLOAD.radius, MY_BALL_PAYLOAD.color)));
 }
 
-addEventListener('keydown', onDriveBall);
+addEventListener('keyup', onDriveBall);
 addEventListener('keyup', onMove);
 color.addEventListener('input', onSetState);
 range.addEventListener('mouseup', onSetState);
@@ -39,101 +29,103 @@ range.addEventListener('mouseup', onSetState);
 socket.onmessage = function (e) {
     let obj = JSON.parse(e.data);
 
-    createObjectOfAllBalls(obj);
+    changeStateOfBall(obj);
 
-    displayBall();
+    displayAllBalls();
 }
 
 
-//Создать объект из всех мячей
-function createObjectOfAllBalls(obj) {
+//Изменить сосотояние мяча
+function changeStateOfBall(obj) {
 
     let id = obj.ballId;
+    let prevStateOfObj;
 
-    if (obj.action === 'add') {
+    switch (obj.action) {
 
-        allBalls.set(obj.ballId, obj);
+        case 'move':
+            prevStateOfObj = allBalls.get(id);
+            obj.payload.color = prevStateOfObj.payload.color;
+            obj.payload.radius = prevStateOfObj.payload.radius;
+            allBalls.set(obj.ballId, obj);
+            break;
 
-    } else {
+        case 'setState':
+            prevStateOfObj = allBalls.get(id);
+            obj.payload.x = prevStateOfObj.payload.x;
+            obj.payload.y = prevStateOfObj.payload.y;
+            allBalls.set(obj.ballId, obj);
+            break;
 
-        let prevStateOfObj = allBalls.get(id);
-
-        switch (obj.action) {
-
-            case 'move':
-                obj.payload.color = prevStateOfObj.payload.color;
-                obj.payload.radius = prevStateOfObj.payload.radius;
-                break;
-
-            case 'setState':
-                obj.payload.x = prevStateOfObj.payload.x;
-                obj.payload.y = prevStateOfObj.payload.y;
-                break;
-        }
-
-        if (obj.action != 'remove') allBalls.set(obj.ballId, obj);
+        default:
+            allBalls.set(obj.ballId, obj);
     }
 }
 
-//Показать мяч
-function displayBall() {
-
-    let differenceResult;
+//Показать мячи
+function displayAllBalls() {
 
     ctx.clearRect(0, 0, 600, 600);
 
     for (let value of allBalls.values()) {
-        ctx.beginPath();
-        ballPayload = value.payload;
+        if (value.action !== 'remove') {
+            ctx.beginPath();
 
-        differenceResult = ballPayload.radius - initialRadius;
-        ctx.arc(initialRadius + ballPayload.x + differenceResult, initialRadius + ballPayload.y + differenceResult, ballPayload.radius, 0, Math.PI * 2);
+            let ballPayload = value.payload;
 
-        ctx.fillStyle = ballPayload.color;
-        ctx.fill();
+            ctx.arc(ballPayload.x, ballPayload.y, ballPayload.radius, 0, Math.PI * 2);
 
-        ctx.closePath();
+            ctx.fillStyle = ballPayload.color;
+            ctx.fill();
+
+            ctx.closePath();
+        }
     }
-
-    moveBall(differenceResult);
 }
 
-//Передвигать мяч
-function moveBall(differenceResult) {
-    if ((initialRadius + ballPayload.x + differenceResult) > (600 - ballPayload.radius)) stepDirection = 'left';
-    if ((initialRadius + ballPayload.y + differenceResult) > (600 - ballPayload.radius)) stepDirection = 'up';
-    if ((initialRadius + ballPayload.x + differenceResult) < ballPayload.radius) stepDirection = 'right';
-    if ((initialRadius + ballPayload.y + differenceResult) < ballPayload.radius) stepDirection = 'down';
+//Передвигать свой мяч
+function moveBall(stepDirection) {
+    if (MY_BALL_PAYLOAD.x > (600 - range.value)) stepDirection = 'left';
+    if (MY_BALL_PAYLOAD.y > (600 - range.value)) stepDirection = 'up';
+    if (MY_BALL_PAYLOAD.x < range.value) stepDirection = 'right';
+    if (MY_BALL_PAYLOAD.y < range.value) stepDirection = 'down';
 
     switch (stepDirection) {
-        case 'right': ballPayload.x += 1; break
-        case 'left': ballPayload.x -= 1; break
-        case 'down': ballPayload.y += 1; break
-        case 'up': ballPayload.y -= 1; break
+        case 'right': MY_BALL_PAYLOAD.x += 20; break
+        case 'left': MY_BALL_PAYLOAD.x -= 20; break
+        case 'down': MY_BALL_PAYLOAD.y += 20; break
+        case 'up': MY_BALL_PAYLOAD.y -= 20; break
     }
 
+}
+
+//Создать пакет данных move
+function createPackageMove(x, y) {
+    return {
+        action: 'move',
+        payload: { x: x, y: y }
+    }
+}
+
+//Создать пакет данных setState
+function createPackageSetState(radius, color) {
+    return {
+        action: 'setState',
+        payload: { radius: radius, color: color }
+    }
 }
 
 //Обработчик на движение
 function onMove() {
-    let dataPacket = {
-        action: 'move',
-        payload: { x: ballPayload.x, y: ballPayload.y }
-    }
-    socket.send(JSON.stringify(dataPacket));
+    socket.send(JSON.stringify(createPackageMove(MY_BALL_PAYLOAD.x, MY_BALL_PAYLOAD.y)));
 }
 
 //Обработчик на установку состояния
 function onSetState() {
-    let dataPacket = {
-        action: 'setState',
-        payload: { radius: range.value, color: color.value }
-    }
-
-    socket.send(JSON.stringify(dataPacket));
+    socket.send(JSON.stringify(createPackageSetState(range.value, color.value)));
 }
 
-//Обработчик на передвижение мяча
+//Обработчик на передвижение своего мяча
 function onDriveBall(e) {
     switch (e.keyCode) {
         case 39: stepDirection = 'right'; break
@@ -142,5 +134,5 @@ function onDriveBall(e) {
         case 38: stepDirection = 'up'; break
     }
 
-    displayBall();
+    moveBall(stepDirection);
 }
