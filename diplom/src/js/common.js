@@ -1,86 +1,9 @@
-const keyProducts = 'PRODUCTS';
-const keyCart = 'CART';
-const products = [
-    {
-        id: 1,
-        title: "MAN'S T-SHIRTS",
-        category: 'men',
-        price: 5,
-        image: 'Livello2',
-        quantity: 1
-    },
-    {
-        id: 2,
-        title: 'PANTS FORCLAZ',
-        category: 'men',
-        price: 30,
-        image: 'Livello3',
-        quantity: 1
-    },
-    {
-        id: 3,
-        title: 'BACKPACK',
-        category: 'men',
-        price: 60,
-        image: 'Livello4',
-        quantity: 1
-    },
-    {
-        id: 4,
-        title: 'GIACKET',
-        category: 'women',
-        price: 60,
-        image: 'Livello5',
-        quantity: 1
-    },
-    {
-        id: 5,
-        title: 'TREKKING SHOES',
-        category: 'women',
-        price: 80,
-        image: 'Livello6',
-        quantity: 1
-    },
-    {
-        id: 6,
-        title: "WOMEN'S T-SHIRT",
-        category: 'women',
-        price: 20,
-        image: 'Livello7',
-        quantity: 1
-    },
-    {
-        id: 7,
-        title: 'CHILDREN DRESS',
-        category: 'children',
-        price: 8,
-        image: 'Livello8',
-        quantity: 1
-    },
-    {
-        id: 8,
-        title: 'BABY SUIT',
-        category: 'children',
-        price: 3,
-        image: 'Livello9',
-        quantity: 1
-    },
-    {
-        id: 9,
-        title: "CHILDREN'S SHOES",
-        category: 'children',
-        price: 55,
-        image: 'Livello10',
-        quantity: 1
-    }
-]
+import list from './products';
+
+const KEYPRODUCTS = 'PRODUCTS';
+const KEYCART = 'CART';
 
 let shop = document.getElementById('shop');
-let prevHTML = shop.innerHTML;
-
-let ascending = document.getElementById('ascending');
-
-let allCategories = document.getElementById('allCategories');
 
 let controls = document.getElementById('controls');
 
@@ -95,11 +18,51 @@ shoppingCart.addEventListener('click', displayProductsFromCart);
 function init() {
     setProductDataToLocalStorage();
     setCartDataToLocalStorage([]);
-    displayAllCategories();
+    displayAllProducts();
 }
 
 //Показать все категории
 function displayAllCategories() {
+
+    shop.innerHTML = `<div class="soder" id="maleCategory">
+    <div class="liniya"><span class="shrift2">MEN</span>
+        <p></p>
+    </div>
+    <div class="stran">
+        <p>1 / 5</p>
+    </div>
+    <div class="stran"><span><img src="src/img/icons/left-chevron.svg"></span><span><img
+                src="src/img/icons/right-chevron.svg"></span></div>
+   
+    </div>`;
+
+    shop.innerHTML += `<div class="soder" id="femaleCategory">
+    <div class="liniya2">
+        <p></p><span class="shrift2">WOMEN</span>
+    </div>
+    <div class="stran2">
+        <p>1 / 5</p>
+    </div>
+    <div class="stran2"><span><img src="src/img/icons/left-chevron.svg"></span><span><img
+                src="src/img/icons/right-chevron.svg"></span></div>
+    </div>`;
+
+    shop.innerHTML += `<div class="soder" id="childrenCategory">
+    <div class="liniya"><span class="shrift2">CHILDREN</span>
+        <p></p>
+    </div>
+    <div class="stran">
+        <p>1 / 5</p>
+    </div>
+    <div class="stran"><span><img src="src/img/icons/left-chevron.svg"></span><span><img
+                src="src/img/icons/right-chevron.svg"></span></div>
+    </div>`
+}
+
+//Показать все товары
+function displayAllProducts() {
+    displayAllCategories();
+
     let maleCategory = document.getElementById('maleCategory');
     let femaleCategory = document.getElementById('femaleCategory');
     let childrenCategory = document.getElementById('childrenCategory');
@@ -113,7 +76,7 @@ function displayAllCategories() {
 
 //Создать категорию
 function createCategory(category) {
-    div = document.createElement('div');
+    let div = document.createElement('div');
     div.className = 'tovaru';
     div.innerHTML = filterProductsByCategory(category);
     return div
@@ -145,22 +108,22 @@ function filterProductsByCategory(category) {
 
 //Установить данные по продуктам в локальное хранилище
 function setProductDataToLocalStorage() {
-    localStorage.setItem(keyProducts, JSON.stringify(products));
+    localStorage.setItem(KEYPRODUCTS, JSON.stringify(list.products));
 }
 
 //Установить данные по корзине в локальное хранилище
 function setCartDataToLocalStorage(arr) {
-    localStorage.setItem(keyCart, JSON.stringify(arr));
+    localStorage.setItem(KEYCART, JSON.stringify(arr));
 }
 
 //Получить данные по товарам
 function getProductDataFromLocalStorage() {
-    return JSON.parse(localStorage.getItem(keyProducts));
+    return JSON.parse(localStorage.getItem(KEYPRODUCTS));
 }
 
 //Получить данные по корзине
 function getCartDataFromLocalStorage() {
-    return JSON.parse(localStorage.getItem(keyCart));
+    return JSON.parse(localStorage.getItem(KEYCART));
 }
 
 //Обработчик по клику по панели управления
@@ -169,13 +132,23 @@ function onControlPanelClick(e) {
     if (e.target.hasAttribute('data-checkbox')) {
         displayProductsCategories();
     } else if (e.target.hasAttribute('data-ascending')) {
-        displayProducts(sortPricesAscending());
+        displayProducts(sortPrices('ascending'));
+        changeStateOfCheckboxes(true);
     } else if (e.target.hasAttribute('data-descending')) {
-        displayProducts(sortPricesDescending());
+        displayProducts(sortPrices('descending'));
+        changeStateOfCheckboxes(true);
     } else if (e.target.hasAttribute('data-all-categories')) {
-        shop.innerHTML = prevHTML;
-        displayAllCategories();
+        changeStateOfCheckboxes(false);
+        shop.innerHTML = '';
+        displayAllProducts();
     }
+}
+
+//Изменить состояние чекбоксов
+function changeStateOfCheckboxes(state) {
+    let checkbox = document.querySelectorAll('input[type="checkbox"]');
+    checkbox = Array.prototype.slice.call(checkbox);
+    checkbox.forEach((item) => item.disabled = state);
 }
 
 //Отобразить продукты категорий
@@ -195,18 +168,17 @@ function displayProductsCategories() {
     }
 }
 
-//Сортировать по возрастанию
-function sortPricesAscending() {
-    return getProductDataFromLocalStorage().sort(function (a, b) {
-        return a.price - b.price;
-    })
-}
+//Сортировать цены
+function sortPrices(direction) {
+    switch (direction) {
+        case 'ascending': return getProductDataFromLocalStorage().sort(function (a, b) {
+            return a.price - b.price;
+        });
 
-//Сортировать по убыванию
-function sortPricesDescending() {
-    return getProductDataFromLocalStorage().sort(function (a, b) {
-        return b.price - a.price;
-    })
+        case 'descending': return getProductDataFromLocalStorage().sort(function (a, b) {
+            return b.price - a.price;
+        })
+    }
 }
 
 //Отобразить продукты
@@ -325,7 +297,7 @@ function removeProductFromCart(e) {
         let productToBeRemoved = arr.find((item) => item.id == id);
         let index = arr.indexOf(productToBeRemoved);
         arr.splice(index, 1);
-    
+
         setCartDataToLocalStorage(arr);
         displayProductsFromCart();
     }
