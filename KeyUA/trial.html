@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./dist/style.css">
+    <script src="./dist/bundle.js" defer></script>
+    <title>Maket</title>
+</head>
+
+<body>
+    <div class="header">
+        <div class="header-cnt">
+            <div class="logo"></div>
+            <div class="menu">
+                Edit details in your cover letter
+            </div>
+        </div>
+    </div>
+
+    <div class="main" id="main">
+        <div class="main-cnt">
+            <h1>
+                Your profile is ready. Get your personalized cover letter
+                now for less than the price of a cup of coffee and improve
+                your career.
+            </h1>
+
+            <div class="main-cnt-block">
+                <div class="main-cnt-block-tariffs">
+                    <div class="selected-tariff">
+                        <div class="selected-tariff-header">
+                            <div></div>
+                            <ul>
+                                <li></li>
+                                <li>
+                                    <p>Trial</p>
+                                    <p>
+                                        <span>The first week only for</span>
+                                        <span>$0,99</span>
+                                    </p>
+                                    <p>Rebills at $8.99 per month after your trial is completed.</p>
+                                </li>
+                                <li>Change</li>
+                            </ul>
+                        </div>
+                        <div class="selected-tariff-body" id="selected-tariff-body">
+                            <ul></ul>
+
+                            <ul>
+                                <li>
+                                    <label for="card-number">Card number</label>
+                                    <input type="text" id="card-number" placeholder="Enter card number" minlength="14"
+                                        maxlength="19" pattern="^[ 0-9]+$">
+                                    <label></label>
+                                </li>
+                                <li>
+                                    <div>
+                                        <label for="exp-month">Exp. month</label>
+                                        <select name="" id="exp-month">
+                                            <option>Month</option>
+                                            <option>1 - April</option>
+                                            <option>2 - April</option>
+                                            <option>3 - April</option>
+                                            <option>4 - April</option>
+                                            <option>5 - April</option>
+                                            <option>6 - April</option>
+                                            <option>7 - April</option>
+                                            <option>8 - April</option>
+                                            <option>9 - April</option>
+                                        </select>
+                                    </div>
+
+                                    <div id="trial"></div>
+
+                                    <div>
+                                        <label for="exp-year">Exp. year</label>
+                                        <select name="" id="exp-year" class="exp-year">
+                                            <option>Year</option>
+                                            <option>2021</option>
+                                            <option>2022</option>
+                                            <option>2023</option>
+                                            <option>2024</option>
+                                            <option>2025</option>
+                                            <option>2026</option>
+                                            <option>2027</option>
+                                            <option>2028</option>
+                                            <option>2029</option>
+                                            <option>2030</option>
+                                        </select>
+                                        <label></label>
+                                    </div>
+                                </li>
+                            </ul>
+
+                            <div class="error-block" id="error-block">
+                                <span class="cart-error-massege-first" id="error-cart-first"></span>
+                                <span class="cart-error-massege-second" id="error-cart-second"></span>
+                            </div>
+
+                            <ul id="selected-tariff-body-cart">
+                                <li>
+                                    <label for="first-name">Cardholder First Name</label>
+                                    <input type="text" id="first-name" placeholder="Enter First Name">
+                                    <label></label>
+                                </li>
+                                <li>
+                                    <label for="last-name">Cardholder Last Name</label>
+                                    <input type="text" id="last-name" placeholder="Enter Last Name">
+                                    <label></label>
+                                </li>
+                            </ul>
+
+                            <ul>
+                                <li id="confirm">Confirm</li>
+                                <li></li>
+                                <li>Secure credit card payment</li>
+                            </ul>
+
+                            <ul>Your card will be automatically attached to your profile,
+                                you can remove it at any time. By clicking “Confirm” you agree
+                                to the <span>Terms & Conditions</span>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="description-tariff">
+                        <ul class="description-tariff-header">
+                            <p></p>
+                        </ul>
+                        <div class="description-tariff-body">
+                            <p>Your plan will include:</p>
+                            <ul>
+                                <li>Unlimited Cover Letters</li>
+                                <li>50+ custom templates</li>
+                                <li>Creative designs</li>
+                                <li>Custom backgrounds</li>
+                                <li>More than 15 color schemes</li>
+                                <li>Create multiple versions</li>
+                                <li>Custom sections</li>
+                                <li>Unlimited PDF downloads</li>
+                                <li>Email sharing</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="main-cnt-block-reviews">
+                    <div class="main-cnt-block-reviews-first">
+                        <div>
+                            <p class="foto-first"></p>
+                            <ul>
+                                <li>Deborah H.</li>
+                                <li>“It is important to show your skills in a cover letter;
+                                    I think you have already heard it before”. Only in this case,
+                                    you will have an opportunity to prove your abilities in the
+                                    interview. I decided to take the help of qualified professionals.
+                                    My skills were demonstrated in the right way.”</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <p class="foto-second"></p>
+                            <ul>
+                                <li>Cooper D.</li>
+                                <li>“I always love a wide selection of something, and the CL has
+                                    satisfied my needs in this case. Many variations of strengths
+                                    and designs impressed me and made me push the matter through.
+                                    And I did not regret my choice when the company sent me an offer
+                                    for cooperation.”</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="main-cnt-block-reviews-second">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="footer-block-first">
+            <div class="footer-logo"></div>
+            <div class="footer-menu">
+                <span>Private Policy</span>
+                <span>|</span>
+                <span>Term of Use</span>
+            </div>
+        </div>
+        <div class="footer-block-second">© 2019, My Letter. All rights reserved.</div>
+    </div>
+</body>
+
+</html>

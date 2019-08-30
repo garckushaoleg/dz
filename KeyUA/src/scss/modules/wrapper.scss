@@ -1,0 +1,1136 @@
+.header {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    box-shadow: 0px 3px 20px rgba(0, 0, 0, 0.1);
+    user-select: none;
+
+    .header-cnt {
+        height: 85px;
+        max-width: 1100px;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .logo {
+            background: url(../img/logo.svg) center/cover;
+            width: 132px;
+            height: 25px;
+            cursor: pointer;
+        }
+
+        .menu {
+            max-width: 242px;
+            width: 100%;
+            height: 19px;
+            text-align: center;
+            font: Bold 15px/19px 'Montserrat';
+            letter-spacing: 0;
+            color: #3D8F85;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    }
+}
+
+.main {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+
+    .main-cnt {
+        max-width: 1100px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        h1 {
+            max-width: 920px;
+            width: 100%;
+            font: Bold 26px/36px 'Open Sans';
+            letter-spacing: 0.52px;
+            color: #333333;
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .main-cnt-block {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+
+            .main-cnt-block-tariffs {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+
+                .first-tariff {
+                    max-width: 350px;
+                    width: 100%;
+                    height: 475px;
+                    border: 2px solid #3D8F85;
+                    border-radius: 7px;
+
+                    .first-tariff-header {
+                        background-color: #3D8F85;
+                        height: 87px;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        align-items: center;
+                        user-select: none;
+
+                        li {
+                            &:nth-child(1) {
+                                font: Bold 24px/41px 'Open Sans';
+                                letter-spacing: 0.72px;
+                                color: #FFFFFF;
+                            }
+
+                            &:nth-child(2) {
+                                font: Bold 21px/29px 'Open Sans';
+                                letter-spacing: 0.42px;
+                                color: #FFFFFF;
+                                opacity: 0.69;
+                                width: 183px;
+                                height: 28px;
+                                display: flex;
+                                justify-content: space-between;
+                            }
+                        }
+                    }
+
+                    .first-tariff-body {
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        align-items: center;
+
+                        li {
+                            &:nth-child(1) {
+                                width: 91px;
+                                height: 103px;
+                                background: url(../img/first_tariff_logo.svg) center/contain no-repeat;
+                            }
+
+                            &:nth-child(2) {
+                                font: Bold 18px/28px 'Open Sans';
+                                color: #646464;
+                                margin: 18px 0 12px 0;
+                            }
+
+                            &:nth-child(3) {
+                                font: 11px/17px 'Open Sans';
+                                color: #646464;
+                            }
+
+                            &:nth-child(4) {
+                                font: Bold 32px/39px 'Montserrat';
+                                letter-spacing: 0.64px;
+                                color: #3D8F85;
+                                margin-bottom: 13px;
+                            }
+
+                            &:nth-child(5) {
+                                max-width: 226px;
+                                width: 100%;
+                                font: 13px/20px 'Open Sans';
+                                color: #585858;
+                                text-align: center;
+                                margin-bottom: 33px;
+                            }
+
+                            &:nth-child(6) {
+                                display: flex;
+
+                                a:link, a:visited {
+                                    padding: 20px 86px;
+                                    background-color: #E24C2C;
+                                    box-shadow: 0px 0px 20px rgba(226, 76, 44, 0.5);;
+                                    border-radius: 7px;
+                                    font: Bold 15px/19px 'Montserrat';
+                                    color: #FFFFFF;
+                                    cursor: pointer;
+                                    user-select: none;
+                                    color: #FFFFFF;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .second-tariff {
+                    max-width: 350px;
+                    width: 100%;
+                    height: 475px;
+                    border: 1px solid #D4D9E6;
+                    border-radius: 7px;
+
+                    .second-tariff-header {
+                        height: 87px;
+                    }
+
+                    .second-tariff-body {
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        align-items: center;
+
+                        li {
+                            &:nth-child(1) {
+                                width: 91px;
+                                height: 103px;
+                                background: url(../img/second_tariff_logo.svg) center/contain no-repeat;
+                            }
+
+                            &:nth-child(2) {
+                                font: Bold 18px/28px 'Open Sans';
+                                color: #646464;
+                                margin: 19px 0 28px 0;
+                            }
+
+                            &:nth-child(3) {
+                                display: flex;
+                                justify-content: baseline;
+                                margin-bottom: 13px;
+
+                                p {
+                                    &:nth-child(1) {
+                                        font: Bold 32px/39px 'Montserrat';
+                                        letter-spacing: 0.64px;
+                                        color: #3D8F85;
+                                    }
+
+                                    &:nth-child(2) {
+                                        font: 13px/20px 'Open Sans';
+                                        color: #646464;
+                                        display: flex;
+                                        align-items: flex-end;
+                                        margin-bottom: 3px;
+                                        margin-left: 1px;
+                                    }
+                                }
+                            }
+
+                            &:nth-child(4) {
+                                text-align: center;
+                                font: 13px/20px 'Open Sans';
+                                color: #585858;
+                                width: 220px;
+                                margin-bottom: 34px;
+                            }
+
+                            &:nth-child(5) {
+                                display: flex;
+
+                                a:link, a:visited {
+                                    padding: 20px 86px;
+                                    background-color: #E24C2C;
+                                    box-shadow: 0px 0px 20px rgba(226, 76, 44, 0.5);;
+                                    border-radius: 7px;
+                                    font: Bold 15px/19px 'Montserrat';
+                                    color: #FFFFFF;
+                                    cursor: pointer;
+                                    user-select: none;
+                                    color: #FFFFFF;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .description-tariff {
+                    max-width: 350px;
+                    width: 100%;
+                    height: 475px;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+
+                    .description-tariff-header {
+                        display: flex;
+                        justify-content: center;
+                        height: 69px;
+                        width: 100%;
+                        background: url(../img/tariff_description_header.svg) center/contain no-repeat;
+
+                        p {
+                            width: 220px;
+                            height: 24px;
+                            margin-top: 13px;
+                            background: url(../img/tariff_description_header_title.svg) center/contain no-repeat;
+                        }
+                    }
+
+                    .description-tariff-body {
+                        width: 100%;
+                        height: 406px;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        align-items: center;
+
+                        p {
+                            font: Bold 16px/24px 'Open Sans';
+                            color: #585858;
+                        }
+
+                        ul {
+                            display: flex;
+                            flex-direction: column;
+                            margin-left: 45px;
+
+                            li {
+                                position: relative;
+                                font: 16px/40px 'Open Sans';
+                                color: #333333;
+
+                                &::before {
+                                    content: '';
+                                    width: 10px;
+                                    height: 7px;
+                                    background: url(../img/check.svg) center/contain no-repeat;
+                                    position: absolute;
+                                    top: 19px;
+                                    left: -25px;
+                                }
+                            }
+                        }
+                    }
+                }
+
+
+                .selected-tariff {
+                    max-width: 533px;
+                    width: 100%;
+                    height: 475px;
+
+                    .selected-tariff-header {
+                        display: flex;
+                        flex-direction: column;
+
+                        div {
+                            background: url(../img/header_tariff.svg) center/contain no-repeat;
+                            max-width: 533px;
+                            width: 100%;
+                            height: 41px;
+                        }
+
+                        ul {
+                            height: 110px;
+                            max-width: 533px;
+                            width: 100%;
+                            display: flex;
+                            align-items: center;
+                            border: 1px solid #D4D9E6;
+
+
+                            li {
+                                &:nth-child(1) {
+                                    background: url(../img/first_tariff_logo.svg) center/contain no-repeat;
+                                    width: 83px;
+                                    height: 94px;
+                                    margin: 0 22px;
+                                }
+
+                                &:nth-child(2) {
+                                    display: flex;
+                                    flex-direction: column;
+                                    margin-right: 45px;
+
+                                    p {
+                                        &:nth-child(1) {
+                                            font: Bold 16px/25px 'Open Sans';
+                                            color: #646464;
+                                        }
+
+                                        &:nth-child(2) {
+                                            display: flex;
+                                            align-items: center;
+
+                                            span {
+                                                &:nth-child(1) {
+                                                    font: 9px/14px 'Open Sans';
+                                                    color: #333333;
+                                                }
+
+                                                &:nth-child(2) {
+                                                    font: Bold 16px/23px 'Montserrat';
+                                                    letter-spacing: 0.32px;
+                                                    color: #3D8F85;
+                                                    margin-left: 15px;
+                                                }
+                                            }
+                                        }
+
+                                        &:nth-child(3) {
+                                            font: 10px/14px 'Open Sans';
+                                            color: #585858;
+                                            opacity: 0.8;
+                                            width: 189px;
+                                            height: 32px;
+                                        }
+                                    }
+                                }
+
+                                &:nth-child(3) {
+                                    padding: 10px 33px;
+                                    font: Bold 13px/16px 'Montserrat';
+                                    color: #3D8F85;
+                                    border: 2px solid #3D8F85;
+                                    border-radius: 7px;
+                                }
+                            }
+                        }
+                    }
+
+                    .selected-tariff-header-annual-plan {
+                        display: flex;
+                        flex-direction: column;
+
+                        ul {
+                            height: 110px;
+                            max-width: 533px;
+                            width: 100%;
+                            display: flex;
+                            align-items: center;
+                            border: 1px solid #D4D9E6;
+
+
+                            li {
+                                &:nth-child(1) {
+                                    background: url(../img/second_tariff_logo.svg) center/contain no-repeat;
+                                    width: 83px;
+                                    height: 94px;
+                                    margin: 0 22px;
+                                }
+
+                                &:nth-child(2) {
+                                    display: flex;
+                                    flex-direction: column;
+                                    margin-right: 45px;
+
+                                    p {
+                                        &:nth-child(1) {
+                                            font: Bold 16px/25px 'Open Sans';
+                                            color: #646464;
+                                        }
+
+                                        &:nth-child(2) {
+                                            display: flex;
+                                            align-items: center;
+
+                                            span {
+                                                &:nth-child(1) {
+                                                    font: Bold 18px/26px 'Montserrat';
+                                                    letter-spacing: 0.36px;
+                                                    color: #3D8F85;
+                                                }
+
+                                                &:nth-child(2) {
+                                                    font: 11px/12px 'Open Sans';
+                                                    color: #333333;
+                                                }
+                                            }
+                                        }
+
+                                        &:nth-child(3) {
+                                            font: 10px/14px 'Open Sans';
+                                            color: #585858;
+                                            opacity: 0.8;
+                                            width: 189px;
+                                            height: 32px;
+                                        }
+                                    }
+                                }
+
+                                &:nth-child(3) {
+                                    padding: 10px 33px;
+                                    font: Bold 13px/16px 'Montserrat';
+                                    color: #3D8F85;
+                                    border: 2px solid #3D8F85;
+                                    border-radius: 7px;
+                                }
+                            }
+                        }
+                    }
+
+                    .selected-tariff-body {
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: space-around;
+                        height: 310px;
+                        max-width: 533px;
+                        width: 100%;
+                        position: relative;
+
+                        ul {
+
+                            &:nth-of-type(1) {
+                                background: url(../img/cards.svg) center/contain no-repeat;
+                                max-width: 467px;
+                                width: 100%;
+                                height: 30px;
+                            }
+
+                            &:nth-of-type(2) {
+                                display: flex;
+                                justify-content: space-between;
+                                align-items: center;
+                                max-width: 515px;
+                                width: 100%;
+                                height: 60px;
+
+                                li {
+
+                                    &:nth-child(1) {
+                                        display: flex;
+                                        flex-direction: column;
+                                        position: relative;
+                                        height: 100%;
+
+                                        label {
+                                            font: 10px/14px 'Open Sans';
+                                            color: #333333;
+                                            margin: 0 0 4px 5px;
+                                        }
+    
+                                        input {
+                                            border: 1px solid #D4D9E6;
+                                            border-radius: 7px;
+                                            height: 39px;
+                                            font: 15px/20px 'Open Sans';
+                                            letter-spacing: 0.3px;
+                                            color: #B6B6B6;
+                                            padding: 0 56px 0 10px;
+                                            max-width: 250px;
+                                            width: 100%;
+    
+                                            &:invalid:not(:placeholder-shown) {
+                                                border-color: #E24C2C;
+                                                padding: 0 20px 0 10px;
+                                                max-width: 210px;
+                                                width: 100%;
+    
+                                                & + label::after {
+                                                    content: '';
+                                                    background: url(../img/error.svg) center/cover;
+                                                    width: 20px;
+                                                    height: 20px;
+                                                    position: absolute;
+                                                    left: 210px;
+                                                    bottom: 13px;
+                                                    margin: 0 10px;
+                                                }
+                                            }
+                                            
+                                            &:valid:not(:placeholder-shown) {
+                                                border-color: #2F7E74;
+                                                padding: 0 20px 0 10px;
+                                                max-width: 210px;
+                                                width: 100%;
+    
+                                                & + label::after {
+                                                    content: '';
+                                                    background: url(../img/success.svg) center/cover;
+                                                    width: 20px;
+                                                    height: 20px;
+                                                    position: absolute;
+                                                    left: 210px;
+                                                    bottom: 13px;
+                                                    margin: 0 10px;
+                                                }
+                                            }
+                                        }
+                                    }
+
+                                    &:nth-child(2) {
+                                        display: flex;
+                                        justify-content: space-between;
+                                        max-width: 250px;
+                                        width: 100%;
+                                        height: 100%;
+                                        position: relative;
+                                        
+                                        select {
+                                            appearance: none;
+                                            background: url(../img/arrow_down.svg);
+                                            background-size: 20px;
+                                            background-repeat: no-repeat;
+                                            background-position: right 5px top 50%;
+                                            height: 39px;
+                                            border: 1px solid #D4D9E6;
+                                            border-radius: 7px;
+                                            font: 15px/20px 'Open Sans';
+                                            letter-spacing: 0.3px;
+                                            color: #B6B6B6;
+                                        }
+
+                                        label {
+                                            font: 10px/14px 'Open Sans';
+                                            color: #333333;
+                                            margin: 0 0 4px 5px;
+                                        }
+                                        
+                                        div:nth-child(2) {
+                                            background: url(../img/trial.svg) center/cover;
+                                            width: 8px;
+                                            height: 22px;
+                                            align-self: center;
+                                            margin: 15px 5px 0 5px;
+                                        }
+    
+                                        .exp-month {
+                                            padding: 0 61px 0 10px;
+                                        }
+
+                                        .exp-year {
+                                            padding: 0 54px 0 10px;
+                                        }
+
+                                        .success-year {
+                                            border-color: #2F7E74;
+                                            padding: 0 30px 0 10px;
+                                            margin-right: 20px;
+
+                                            & + label::after {
+                                                content: '';
+                                                background: url(../img/success.svg) center/cover;
+                                                width: 20px;
+                                                height: 20px;
+                                                position: absolute;
+                                                left: 210px;
+                                                bottom: 13px;
+                                                margin: 0 0 0 12px;
+                                            }
+                                        }
+
+                                        .success-month {
+                                            border-color: #2F7E74;
+                                            padding: 0 48px 0 10px;
+                                        }
+
+                                        @-moz-document url-prefix() {
+                                            .success-month {
+                                                border-color: #2F7E74;
+                                                padding: 0 45px 0 10px;
+                                            }
+                                        }
+
+                                        .error-year {
+                                            border-color: #E24C2C;
+                                            padding: 0 30px 0 10px;
+                                            margin-right: 20px;
+
+                                            & + label::after {
+                                                content: '';
+                                                background: url(../img/error.svg) center/cover;
+                                                width: 20px;
+                                                height: 20px;
+                                                position: absolute;
+                                                left: 210px;
+                                                bottom: 13px;
+                                                margin: 0 0 0 12px;
+                                            }
+                                        }
+
+                                        .error-month {
+                                            border-color: #E24C2C;
+                                            padding: 0 48px 0 10px;
+                                        }
+
+                                        @-moz-document url-prefix() {
+                                            .error-month {
+                                                border-color: #E24C2C;
+                                                padding: 0 45px 0 10px;
+                                            }
+                                        }
+
+                                        .success-trial {
+                                            position: absolute;
+                                            left: 118px;
+                                            top: 11px;
+                                        }
+                                    }
+                                }
+                            }
+
+                            &:nth-of-type(3) {
+                                display: flex;
+                                justify-content: space-between;
+                                max-width: 512px;
+                                width: 100%;
+    
+                                    li {
+
+                                        &:nth-child(1) {
+                                            display: flex;
+                                            flex-direction: column;
+                                            position: relative;
+
+
+                                            label {
+                                                font: 10px/14px 'Open Sans';
+                                                color: #333333;
+                                                margin: 0 0 4px 5px;
+                                            }
+    
+                                            input {
+                                                border: 1px solid #D4D9E6;
+                                                border-radius: 7px;
+                                                height: 39px;
+                                                font: 15px/20px 'Open Sans';
+                                                letter-spacing: 0.3px;
+                                                color: #B6B6B6;
+                                                padding: 0 56px 0 10px;
+                                                max-width: 250px;
+                                                width: 100%;
+    
+                                                &:valid:not(:placeholder-shown) {
+                                                    border-color: #2F7E74;
+                                                    padding: 0 20px 0 10px;
+                                                    max-width: 210px;
+                                                    width: 100%;
+        
+                                                    & + label::after {
+                                                        content: '';
+                                                        background: url(../img/success.svg) center/cover;
+                                                        width: 20px;
+                                                        height: 20px;
+                                                        position: absolute;
+                                                        left: 210px;
+                                                        bottom: 13px;
+                                                        margin: 0 10px;
+                                                    }
+                                                }
+                                            }
+                                        }
+
+                                        &:nth-child(2) {
+                                            display: flex;
+                                            flex-direction: column;
+                                            position: relative;
+
+                                            label {
+                                                font: 10px/14px 'Open Sans';
+                                                color: #333333;
+                                                margin: 0 0 4px 5px;
+                                            }
+    
+                                            input {
+                                                border: 1px solid #D4D9E6;
+                                                border-radius: 7px;
+                                                height: 39px;
+                                                font: 15px/20px 'Open Sans';
+                                                letter-spacing: 0.3px;
+                                                color: #B6B6B6;
+                                                padding: 0 56px 0 10px;
+                                                max-width: 250px;
+                                                width: 100%;
+                                                
+    
+                                                &:valid:not(:placeholder-shown) {
+                                                    border-color: #2F7E74;
+                                                    padding: 0 20px 0 10px;
+                                                    margin-right: 36px;
+                                                    max-width: 210px;
+                                                    width: 100%;
+        
+                                                    & + label::after {
+                                                        content: '';
+                                                        background: url(../img/success.svg) center/cover;
+                                                        width: 20px;
+                                                        height: 20px;
+                                                        position: absolute;
+                                                        left: 210px;
+                                                        bottom: 13px;
+                                                        margin: 0 10px;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                            }
+
+                            @-moz-document url-prefix() {
+                                &:nth-of-type(3) {
+                                    max-width: 515px;
+                                }
+                            }
+
+                            &:nth-of-type(4) {
+                                display: flex;
+                                align-items: center;
+
+                                li {
+                                    &:nth-child(1) {
+                                        padding: 10px 30px;
+                                        background-color: #E24C2C;
+                                        border-radius: 7px;
+                                        font: Bold 15px/19px 'Montserrat';
+                                        letter-spacing: 0.15px;
+                                        color: #FFFFFF;
+                                        opacity: 0.6;
+                                    }
+
+                                    &:nth-child(2) {
+                                        width: 9px;
+                                        height: 13px;
+                                        background: url(../img/safe.svg) center/cover;
+                                        margin: 0 7px 0 17px;
+                                    }
+
+                                    &:nth-child(3) {
+                                        font: 11px/17px 'Open Sans';
+                                        color: #B6B6B6;
+                                    }
+                                }
+
+                                .confirm {
+                                    background-color: rgb(250, 46, 0) !important;;
+                                    box-shadow: 0px 0px 10px #E24C2C;
+                                }
+                            }
+
+                            &:nth-of-type(5) {
+                                max-width: 399px;
+                                width: 100%;
+                                font: 10px/15px 'Open Sans';
+                                color: #585858;
+
+                                span {
+                                    text-decoration: underline;
+                                    font: 10px/15px 'Open Sans';
+                                    color: #333333;
+                                }
+                            }
+                        }
+
+                        .error-block {
+                            position: relative;
+                            display: none;
+                        }
+
+                        .error-block-true {
+                            display: block;
+                        }
+
+                        .cart-error-massege-first {
+                            font: 10px/14px 'Open Sans';
+                            color: #E24C2C;
+                            position: absolute;
+                            top: -18px;
+                        }
+
+                        .cart-error-massege-second {
+                            font: 10px/14px 'Open Sans';
+                            color: #E24C2C;
+                            position: absolute;
+                            left: 265px;
+                            bottom: 2px;
+                        }
+                    }
+                }
+            }
+
+            .main-cnt-block-reviews {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                justify-content: center;
+                align-items: center;
+                margin-top: 40px;
+
+                .main-cnt-block-reviews-first {
+                    width: 100%;
+                    display: flex;
+                    justify-content: space-between;
+
+                    div {
+                        display: flex;
+                        justify-content: space-between;
+                        max-width: 530px;
+                        width: 100%;
+
+                        .foto-first {
+                            width: 80px;
+                            height: 80px;
+                            background: url(../img/deborah.png) center/cover;
+                        }
+
+                        .foto-second {
+                            width: 80px;
+                            height: 80px;
+                            background: url(../img/cooper.png) center/cover;
+                        }
+
+                        ul {
+                            max-width: 432px;
+                            width: 100%;
+
+                            li {
+                                &:nth-child(1) {
+                                    font: Semibold 18px/28px 'Open Sans';
+                                    color: #333333;
+                                }
+
+                                &:nth-child(2) {
+                                    font: 15px/25px 'Open Sans';
+                                    letter-spacing: 0.3px;
+                                    color: #646464;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .main-cnt-block-reviews-second {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    width: 27px;
+                    margin-top: 25px;
+
+                    span {
+                        border-radius: 50%;
+                        cursor: pointer;
+
+                        &:nth-child(1) {
+                            width: 8px;
+                            height: 8px;
+                            background-color: #3D8F85;
+                        }
+
+                        &:nth-child(2) {
+                            width: 6px;
+                            height: 6px;
+                            background-color: #E8E8E8;
+                        }
+
+                        &:nth-child(3) {
+                            width: 4px;
+                            height: 4px;
+                            background-color: #E8E8E8;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.footer {
+    width: 100%;
+    height: 155px;
+    background-color: #2A1818;
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+
+    .footer-block-first {
+        display: flex;
+        align-items: center;
+        max-width: 1100px;
+        width: 100%;
+        height: 87px;
+        position: relative;
+
+        .footer-logo {
+            background: url(../img/footer_logo.svg) center/cover;
+            width: 132px;
+            height: 25px;
+            cursor: pointer;
+        }
+
+        .footer-menu {
+            font: 15px/50px 'Open Sans';
+            color: #FFFFFF;
+            opacity: 0.8;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 279px;
+            display: flex;
+            justify-content: space-between;
+            cursor: pointer;
+        }
+    }
+
+    .footer-block-second {
+        width: 100%;
+        height: 68px;
+        border-top: 1px solid rgba(128, 128, 128, 0.1);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font: 13px/50px 'Open Sans';
+        color: #FFFFFF;
+        opacity: 0.4;
+    }
+}
+
+@media (max-width: 767px) {
+    .header {
+        .header-cnt {
+            flex-direction: column;
+            justify-content: space-around;
+        }
+    }
+
+    .main {
+        .main-cnt {
+            padding: 0 15px;
+
+            .main-cnt-block {
+                .main-cnt-block-tariffs {
+                    flex-direction: column;
+                    height: 1400px;
+
+                    .first-tariff {
+                        .first-tariff-header {
+                            text-align: center;
+
+                            li {
+                                &:nth-child(1) {
+                                    letter-spacing: 0;
+                                }
+                            }
+                        }
+                    }
+
+                    .selected-tariff {
+                        .selected-tariff-header {
+                            ul {
+                                justify-content: center;
+                                height: 240px;
+                                flex-direction: column;
+
+                                li {
+                                    text-align: center;
+
+                                    &:nth-child(2) {
+                                        justify-content: center;
+                                        margin-right: 0;
+                                    }
+                                }
+                            }
+                        }
+
+                        .selected-tariff-header-annual-plan {
+                            ul {
+                                height: 240px;
+                                flex-direction: column;
+                                justify-content: center;
+
+                                li {
+
+                                    &:nth-child(2) {
+                                        justify-content: center;
+                                        align-items: center;
+                                        margin-right: 0;
+
+                                        p {
+                                            &:nth-child(3) {
+                                                text-align: center;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        .selected-tariff-body {
+                            height: 610px;
+
+                            ul {
+                                &:nth-of-type(2) {
+                                    flex-direction: column;
+                                }
+    
+                                &:nth-of-type(3) {
+                                    flex-direction: column;
+                                    align-items: center;
+
+                                    li {
+                                        &:nth-child(2) {
+                                            input {
+                                                &:valid:not(:placeholder-shown) {
+                                                    margin-right: 0;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+
+                                &:nth-of-type(4) {
+                                    justify-content: space-around;
+                                    width: 100%;
+
+                                    li{
+                                        &:nth-child(2) {
+                                            margin: 0 17px 0 17px;
+                                        }
+                                    }
+                                }
+                            }
+
+                            .cart-error-massege-first {
+                                top: -120px;
+                                left: 130px;
+                            }
+
+                            .cart-error-massege-second {
+                                left: 30px;
+                                top: 10px;
+                            }
+                        }
+                    }
+                }
+
+                .main-cnt-block-reviews {
+
+                    .main-cnt-block-reviews-first {
+                        flex-direction: column;
+
+                        div {
+                            flex-direction: column;
+                            text-align: center;
+                            align-items: center;
+
+                            .foto-first {
+                                margin-bottom: 10px;
+                            }
+    
+                            .foto-second {
+                                margin-bottom: 10px;
+                            }
+
+                            ul {
+                                margin-bottom: 20px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .footer {
+        .footer-block-first {
+            margin-top: 10px;
+            flex-direction: column;
+        }
+
+    }
+}
